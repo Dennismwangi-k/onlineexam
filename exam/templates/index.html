@@ -1,0 +1,19 @@
+"Working"
+
+<hr>
+{% if request.user.is_authenticated %}
+<h2>CONGRATS :)</h2>
+<h3>You Are Logged in!</h3>
+<h4> WELCOME TO DASHBOARD!</h4>
+    button for log out
+    <a href="{% url 'account_logout' %}"> Log Out</a>
+{% else %}
+<h2>SORRY :/</h2>
+<h3>You Are Logged Out!</h3>
+    <p>Link to log in:
+    <p>By Django Admin Dashboard w/ username/password:</p>
+    <p>using url -> .../accounts/login/</p>
+    
+    <a href="{% url 'account_login' %}"> LogIn</a>
+    <hr>
+{% endif %}
