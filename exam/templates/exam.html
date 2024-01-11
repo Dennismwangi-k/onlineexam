@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+ 
+
+  <div class="custom-container">
+
+    <center class="info-section">
+      <section>
+        <h1>
+          Get Started in Simple Steps
+        </h1>
+        <p>
+          You're just a few steps away from getting started with your test.
+        </p>
+      </section>
+    </center>
+    <div class="course-cards">
+      <div class="course-card" onclick="openCourse('course1')">
+        <div class="image-section">
+          <div class="play-button">
+            <i class="far fa-play-circle"></i>
+          </div>
+          <img class="course" src="{% static 'assets/images/course1.png' %}" alt="Course 1" />
+        </div>
+        <div class="course-data">
+          <h2>Test Course 1</h2>
+          <p class="course-description">Description of Test for Course 1</p>
+          <section class="course-metadata">
+            <span class="course-link">
+              <a href="{% url 'test' %}">Start Test</a>
+            </span>
+            <span class="questions-count">
+              <span><span class="number">
+                  10
+                </span> Questions</span>
+              <span class="course-duration">
+                <i class="far fa-clock"></i>
+                1 hr</span>
+            </span>
+            </p>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="openCourse('course2')">
+        <div class="image-section">
+          <div class="play-button">
+            <i class="far fa-play-circle"></i>
+          </div>
+          <img class="course" src="{% static 'assets/images/course2.png' %}" alt="Course 2" />
+        </div>
+        <div class="course-data">
+          <h2>Test Course 2</h2>
+          <p class="course-description">Description of Test for Course 2</p>
+          <section class="course-metadata">
+            <span class="course-link">
+              <a href="{% url 'test' %}">Start Test</a>
+            </span>
+            <span class="questions-count">
+              <span><span class="number">
+                  7
+                </span> Questions</span>
+              <span class="course-duration">
+                <i class="far fa-clock"></i>
+                20 min</span>
+            </span>
+            </p>
+        </div>
+      </div>
+
+    </div>
+    
+{% endblock %}
