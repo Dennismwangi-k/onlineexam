@@ -1,0 +1,375 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div id="quiz-container" style="position: relative;">
+    <h1 id="course_name">Quiz</h1>
+    <div class="top-buttons">
+        <button class="round-button" type="button" id="prev-button">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="round-button" type="button" id="next-button">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+    <div class="question-numbers">
+        <!-- Question numbers inject-->
+    </div>
+    <div class="colors">
+        Current
+        <div class="current">
+        </div>
+        Correct
+        <div class="correct">
+        </div>
+        Incorrect
+        <div class="incorrect">
+        </div>
+        Skipped
+        <div class="skipped">
+        </div>
+    </div>
+    <div class="question-holder">
+        <div class="question-stats">
+            QUESTION <span class="current-question-stat">1</span> OF <span class="total-questions-stat">3</span>
+        </div>
+        <center>
+            <div id="question-container">
+                <!-- Question inject-->
+            </div>
+        </center>
+    </div>
+    <form id="answers-container">
+        <!-- Options inject-->
+    </form>
+    <div class="bottom-buttons">
+        <button class="next-button2" type="button" id="next-button2">
+            Next
+            <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="submit-button" type="button" id="submit-button">
+            Check
+            <i class="fas fa-check"></i>
+        </button>
+    </div>
+    <div class="alert-box">
+        <!-- Alert box inject-->
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        //TODO! fetch questions from database
+        const questions = [
+            {
+                question: 'What is the capital of France?',
+                options: ['Paris', 'London', 'Berlin', 'Madrid'],
+                answer: 'Paris'
+            },
+            {
+                question: 'Who painted the Mona Lisa?',
+                options: ['Vincent Van Gogh', 'Pablo Picasso', 'Leonardo da Vinci', 'Michelangelo'],
+                answer: 'Leonardo da Vinci'
+            },
+            {
+                question: 'What is the largest planet in our solar system?',
+                options: ['Earth', 'Jupiter', 'Saturn', 'Mars'],
+                answer: 'Jupiter'
+            },
+        ];
+
+        let currentQuestionIndex = 0;
+        let CorrectAnswers = 0;
+
+        //map for question and answers
+        let questionMap = new Map();
+
+
+        //display question numbers
+        const questionNumbers = document.querySelector('.question-numbers');
+        questions.forEach((question, index) => {
+            const questionNumber = document.createElement('div');
+            questionNumber.className = 'question-number';
+            questionNumber.textContent = index + 1;
+            questionNumbers.appendChild(questionNumber);
+        });
+
+        const questionContainer = document.getElementById('question-container');
+        const answersContainer = document.getElementById('answers-container');
+        const submitButton = document.getElementById('submit-button');
+
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const nextButton2 = document.getElementById('next-button2');
+
+        //url ...course.html?name=course2
+        let url = window.location.search;
+        let course_param = url.split('=')[1];
+        let course_name = document.getElementById('course_name');
+        course_name.innerHTML = "Quiz for " + course_param;
+
+
+        nextButton2.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        });
+
+        function showQuestion(index) {
+            const questionObj = questions[index];
+            questionContainer.textContent = questionObj.question;
+            answersContainer.innerHTML = '';
+
+            questionObj.options.forEach((option, i) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'answer-option';
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'option';
+                radio.value = option;
+                radio.id = 'option' + i;
+
+                const label = document.createElement('label');
+                label.htmlFor = 'option' + i;
+                label.textContent = option;
+
+                wrapper.appendChild(radio);
+                wrapper.appendChild(label);
+
+                answersContainer.appendChild(wrapper);
+            });
+
+            //if it is the last question
+            if (currentQuestionIndex === questions.length - 1) {
+
+                //disable next button
+                nextButton2.disabled = true;
+                nextButton.disabled = true;
+
+                //change submit button text to finish
+                submitButton.innerHTML = "Finish";
+            } else {
+                nextButton2.disabled = false;
+                nextButton.disabled = false;
+                submitButton.innerHTML = "Check";
+            }
+
+            //if it is the first question
+            if (currentQuestionIndex === 0) {
+                prevButton.style.display = "none";
+            } else {
+                prevButton.style.display = "block";
+            }
+
+
+            let questionNumStats = document.getElementsByClassName('current-question-stat');
+            questionNumStats[0].innerHTML = currentQuestionIndex + 1;
+
+            let totalQuestionsStats = document.getElementsByClassName('total-questions-stat');
+            totalQuestionsStats[0].innerHTML = questions.length;
+
+            //remove current class from all other questions
+            let questionNumbers = document.getElementsByClassName('question-number');
+            for (let i = 0; i < questionNumbers.length; i++) {
+                if (i !== currentQuestionIndex) {
+                    questionNumbers[i].classList.remove('current');
+                }
+            }
+
+            let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
+            questionNumber.classList.add('current');
+
+            // Enable the submit button for the new question
+            if (questionMap.get(questionObj.question) == null) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+                showCustomAlert("You have already answered this question", "error");
+            }
+        }
+
+        function selectAnswer() {
+            const selectedOption = answersContainer.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                let question = questions[currentQuestionIndex];
+                let isCorrect = question.answer === selectedOption.value;
+                showCustomAlert(isCorrect ? "Correct" : "Incorrect", isCorrect ? "success" : "error");
+                if (isCorrect) {
+                    CorrectAnswers++;
+                    let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
+                    questionNumber.classList.add('correct');
+                } else {
+                    let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
+                    questionNumber.classList.add('incorrect');
+                }
+
+                const allOptions = answersContainer.querySelectorAll('.answer-option');
+                allOptions.forEach(option => {
+                    const radio = option.querySelector('input');
+                    if (radio.value === question.answer) {
+                        option.style.backgroundColor = '#d4edda';
+                    } else if (radio === selectedOption) {
+                        option.style.backgroundColor = 'rgba(241,59,75,0.74)';
+                    }
+                });
+            } else {
+                showCustomAlert("Please select an answer", "error");
+                return;
+            }
+
+            submitButton.disabled = true;
+            let question = questions[currentQuestionIndex];
+            let answer = question.answer === selectedOption.value ? "Correct" : "Incorrect";
+            console.log(question.question + " " + selectedOption.value + " " + answer);
+            questionMap.set(questions[currentQuestionIndex].question, [selectedOption.value, answer]);
+
+            setTimeout(() => {
+                // If this is the last question, show the results
+                if (currentQuestionIndex === questions.length - 1) {
+                    //check if all questions are answered
+                    if (questionMap.size !== questions.length) {
+                        showCustomAlert("Please answer all questions", "error");
+                        //enable submit button
+                        submitButton.disabled = false;
+                        return;
+                    }
+
+                    // Last question
+                    showCustomAlert("Your score is " + CorrectAnswers + "/" + questions.length, "success");
+                    //send score to database
+                    //TODO! get user id from session
+                    let user_id = 1;
+                    let course_name = window.location.search.split('=')[1];
+                    let data = {
+                        user_id: user_id,
+                        course_name: course_name,
+                        score: CorrectAnswers
+                    };
+
+                    //TODO! send data to backend
+                }
+            }, 1500); // Delay after selecting an answer
+        }
+
+        function showCustomAlert(msg, type) {
+            const alertBoxContainer = document.querySelector('.alert-box');
+            const alertBox = alertBoxContainer ? alertBoxContainer : document.createElement('div');
+            alertBox.className = 'alert-box';
+            alertBox.classList.add(type);
+            let iconText = type === "success" ? "<i class='fas fa-check-circle'></i>" : "<i class='fas fa-times-circle'></i>";
+
+            alertBox.innerHTML = iconText + " " + msg;
+            document.body.appendChild(alertBox);
+            setTimeout(() => {
+                alertBox.remove();
+            }, 2000);
+        }
+
+        submitButton.addEventListener('click', selectAnswer);
+
+        showQuestion(currentQuestionIndex);
+    });
+</script>
+ <!-- footer section -->
+ <footer>
+    <div class="tp-footer-area pt-100 p-relative black-bg p-relative">
+       <div class="container">
+         <div class="row mb-4">
+            <div class="col-xl-5 col-lg-5 col-md-5">
+               <div class="tp-footer-widget">
+                     <div class="tp-footer-widget__logo mb-30">
+                          <h3>Nursing Hub</h3>
+                     </div>
+                     <div class="tp-footer-widget__text mb-30">
+                        <p>Designed to assess a student's preparedness for entering the health science field.</p>
+                        <p>Email Address: <a href="">Support@example.com</a></p>
+                        <p>Phone No: <a href="">+1234567890</a></p>
+                     </div>
+               </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-1"></div>
+            <div class="col-6 col-xl-3 col-lg-3 col-md-3">
+               <div class="tp-footer-widget">
+                      <div class="tp-footer-widget__title pb-15">
+                        <h3 class="footer-title">Company</h3>
+                      </div>
+                      <div class="tp-footer-widget__list">
+                          <ul>
+                              <li><a href="contact.html">Contact us</a></li>
+                              <li><a href="service.html" previewlistener="true">Services</a></li>
+                              <li><a href="blog.html" previewlistener="true">Blog</a></li>
+                          </ul>
+                      </div>
+               </div>
+            </div>
+            <div class="col-6 col-xl-3 col-lg-3 col-md-3">
+               <div class="tp-footer-widget pl-20">
+                     <div class="tp-footer-widget__title pb-15">
+                        <h3 class="footer-title">Resources</h3>
+                     </div>
+                     <div class="tp-footer-widget__list">
+                        <ul>
+                          <li><a href="#">Privacy Policy</a></li>
+                          <li><a href="#">Terms of use</a></li>
+                          <li><a href="#">Help Center</a></li>
+                        </ul>
+                     </div>
+               </div>
+            </div>
+              <div class="w-100 d-flex justify-content-center gap-5">
+              <a href="" class="tp-btn-yellow px-5" previewlistener="true" style="margin-right: 20px;">Join Us Today</a>
+              <a href="" class="tp-btn-yellow px-5" previewlistener="true">Or Login Now</a>
+          </div>
+         </div>
+
+          <div class="row text-center">
+             <div class="col-xl-12 wow tpfadeUp" data-wow-duration=".1s" data-wow-delay=".1s">
+                   <p class="right-receved text-white">© 2023 Nursinghub.com <span class="ms-3 me-3">|</span> <a class="me-2" href="https://youtube.com%2F@youtube.com/@NaxlexNursingPrep?si=knay43iPIPmgR3HK" previewlistener="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"></path>
+                      </svg></a>  <span class="me-1"> <a href="https://www.tiktok.com/@naxlexnursingprep?is_from_webapp=1&amp;sender_device=pc" previewlistener="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                        <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"></path>
+                      </svg></a></span>
+                      <span class="me-2"><a href="" previewlistener="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+                      </svg></a></span>
+                      <span class="me-2"><a href="" previewlistener="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reddit" viewBox="0 0 16 16">
+                        <path d="M6.167 8a.831.831 0 0 0-.83.83c0 .459.372.84.83.831a.831.831 0 0 0 0-1.661zm1.843 3.647c.315 0 1.403-.038 1.976-.611a.232.232 0 0 0 0-.306.213.213 0 0 0-.306 0c-.353.363-1.126.487-1.67.487-.545 0-1.308-.124-1.671-.487a.213.213 0 0 0-.306 0 .213.213 0 0 0 0 .306c.564.563 1.652.61 1.977.61zm.992-2.807c0 .458.373.83.831.83.458 0 .83-.381.83-.83a.831.831 0 0 0-1.66 0z"></path>
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.828-1.165c-.315 0-.602.124-.812.325-.801-.573-1.9-.945-3.121-.993l.534-2.501 1.738.372a.83.83 0 1 0 .83-.869.83.83 0 0 0-.744.468l-1.938-.41a.203.203 0 0 0-.153.028.186.186 0 0 0-.086.134l-.592 2.788c-1.24.038-2.358.41-3.17.992-.21-.2-.496-.324-.81-.324a1.163 1.163 0 0 0-.478 2.224c-.02.115-.029.23-.029.353 0 1.795 2.091 3.256 4.669 3.256 2.577 0 4.668-1.451 4.668-3.256 0-.114-.01-.238-.029-.353.401-.181.688-.592.688-1.069 0-.65-.525-1.165-1.165-1.165z"></path>
+                      </svg></a></span>
+                      <span class="me-2"><a href="
+                       " previewlistener="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+                      </svg></a></span>
+                                                      <span class="me-2"><a href="https://www.quora.com/profile/Naxlex-Nursing-Prep/" previewlistener="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-quora" viewBox="0 0 16 16">
+<path d="M8.73 12.476c-.554-1.091-1.204-2.193-2.473-2.193-.242 0-.484.04-.707.142l-.43-.863c.525-.45 1.373-.808 2.464-.808 1.697 0 2.568.818 3.26 1.86.41-.89.605-2.093.605-3.584 0-3.724-1.165-5.636-3.885-5.636-2.68 0-3.839 1.912-3.839 5.636 0 3.704 1.159 5.596 3.84 5.596.425 0 .811-.046 1.166-.15Zm.665 1.3a7.127 7.127 0 0 1-1.83.244C3.994 14.02.5 11.172.5 7.03.5 2.849 3.995 0 7.564 0c3.63 0 7.09 2.828 7.09 7.03 0 2.337-1.09 4.236-2.675 5.464.512.767 1.04 1.277 1.773 1.277.802 0 1.125-.62 1.179-1.105h1.043c.061.647-.262 3.334-3.178 3.334-1.767 0-2.7-1.024-3.4-2.224Z"></path>
+</svg></a></span>
+                      </p>
+                   <p></p>
+                </div>
+             </div>
+          </div>
+       </div>
+    
+  </footer>
+  <!-- footer section -->
+
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+</body>
+
+{% endblock %}
