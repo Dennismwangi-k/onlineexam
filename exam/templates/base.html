@@ -34,6 +34,7 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'assets/css/question.css' %}">
 </head>
 
 <body>
@@ -59,7 +60,7 @@
               </div>
 
               <!-- Logo and Brand -->
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="{% url 'index' %}">
                   <img src="{% static 'images/logo.png' %}" alt="">
                   <span>Nursing Hub</span>
               </a>
