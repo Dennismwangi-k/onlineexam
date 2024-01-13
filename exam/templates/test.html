@@ -1,60 +1,91 @@
-{% extends "base.html" %} {% load static %} {% block content %}
-<div id="quiz-container" style="position: relative;">
-    <h1 id="course_name">Quiz</h1>
-    <div class="top-buttons">
-        <button class="round-button" type="button" id="prev-button">
-            <i class="fas fa-arrow-left"></i>
-        </button>
-        <button class="round-button" type="button" id="next-button">
-            <i class="fas fa-arrow-right"></i>
-        </button>
-    </div>
-    <div class="question-numbers">
-        <!-- Question numbers inject-->
-    </div>
-    <div class="colors">
-        Current
-        <div class="current">
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+          </div>
         </div>
-        Correct
-        <div class="correct">
-        </div>
-        Incorrect
-        <div class="incorrect">
-        </div>
-        Skipped
-        <div class="skipped">
-        </div>
-    </div>
-    <div class="question-holder">
-        <div class="question-stats">
-            QUESTION <span class="current-question-stat">1</span> OF <span class="total-questions-stat">3</span>
-        </div>
-        <center>
-            <div id="question-container">
-                <!-- Question inject-->
-            </div>
-        </center>
-    </div>
-    <form id="answers-container">
-        <!-- Options inject-->
-    </form>
-    <div class="bottom-buttons">
-        <button class="next-button2" type="button" id="next-button2">
-            Next
-            <i class="fas fa-arrow-right"></i>
-        </button>
-        <button class="submit-button" type="button" id="submit-button">
-            Check
-            <i class="fas fa-check"></i>
-        </button>
-    </div>
-    <div class="alert-box">
-        <!-- Alert box inject-->
-    </div>
-</div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-<script>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div id="quiz-container" style="position: relative;">
+                <h1 id="course_name" class="card-header">Quiz</h1>
+                <div class="card-body">
+                  <div class="top-buttons">
+                    <button class="btn btn-secondary round-button" type="button" id="prev-button">
+                      <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="btn btn-secondary round-button" type="button" id="next-button">
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                  <div class="question-numbers">
+                    <!-- Question numbers inject-->
+                  </div>
+                  <div class="colors">
+                    Current
+                    <div class="current"></div>
+                    Correct
+                    <div class="correct"></div>
+                    Incorrect
+                    <div class="incorrect"></div>
+                    Skipped
+                    <div class="skipped"></div>
+                  </div>
+                  <div class="question-holder">
+                    <div class="question-stats">
+                      QUESTION <span class="current-question-stat">1</span> OF <span class="total-questions-stat">3</span>
+                    </div>
+                    <center>
+                      <div id="question-container">
+                        <!-- Question inject-->
+                      </div>
+                    </center>
+                  </div>
+                  <form id="answers-container" class="mt-3">
+                    <!-- Options inject-->
+                  </form>
+                  <div class="bottom-buttons mt-3">
+                    <button class="btn btn-primary next-button2" type="button" id="next-button2">
+                      Next
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-success submit-button" type="button" id="submit-button">
+                      Check
+                      <i class="fas fa-check"></i>
+                    </button>
+                  </div>
+                  <div class="alert-box mt-3">
+                    <!-- Alert box inject-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
 
         //TODO! fetch questions from database
@@ -284,6 +315,4 @@
         showQuestion(currentQuestionIndex);
     });
 </script>
-
-
-{% endblock %}
+  {% endblock %}

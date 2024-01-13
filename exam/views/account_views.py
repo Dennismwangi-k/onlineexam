@@ -48,7 +48,7 @@ def login(request):
         if user.groups.filter(name="Admin").exists():
             return redirect('admin_view_dashboard')
         else:
-            return redirect('dashboard')
+            return redirect('exam')
 
       else:
         messages.error(request, "Invalid username or password.")

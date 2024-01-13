@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request, 'landing.html')
+    return render(request, 'index.html')
 
 def exam(request):
     return render(request, 'exam.html')
