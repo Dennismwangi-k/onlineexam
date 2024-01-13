@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.contrib.auth.models import AbstractUser
 '''import abstractuser'''
 
@@ -11,6 +12,19 @@ class ExamUser(AbstractUser):
     is_teacher = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=144, blank=True, null=True)
+    last_name = models.CharField(max_length=144, blank=True, null=True)
+    profile_picture = models.ImageField(upload_to="profiles", null=True, blank=True)
+    phone = models.CharField(
+        max_length=13,
+        null=True,
+        blank=True,
+        validators=[MinLengthValidator(10), MaxLengthValidator(13)],
+    )
+
+    def __str__(self):
+        return self.username
     
 
 
@@ -41,3 +55,5 @@ class QuestionAnswers(models.Model):
 
     def __str__(self):
         return self.answer_id
+
+
