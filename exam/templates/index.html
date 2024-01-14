@@ -1,510 +1,580 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% load static %}
+{% load custom_filters %}
 
-    <!-- slider section -->
-    <section class=" slider_section ">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 ">
-            <div class="detail_box">
-              <h1>
-                Most trusted TEAS 7, HESI <br>
-                A2 & Nursing test prep <br>
-                with a guaranteed pass  <br>
-                of 90%
-              </h1>
-              <p>
-                Money-back guarantee if you use our service and fail the actual exam. Option of a personalized live tutor on your area of weakness.
-              </p>
-              <a href="" class="">
-                Sign Up & Get Started</a>
-            </div>
-          </div>
-          <div class="col-lg-5 col-md-6 offset-lg-1">
-            <div class="img_content">
-              <div class="img_container">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <div class="img-box">
-                        <img src="{% static 'images/slider-img.jpg' %}" alt="">
-                      </div>
-                    </div>
-                    <div class="carousel-item">
-                      <div class="img-box">
-                        <img src="{% static 'images/slider-img.jpg' %}" alt="">
-                      </div>
-                    </div>
-                    <div class="carousel-item">
-                      <div class="img-box">
-                        <img src="{% static 'images/slider-img.jpg' %}" alt="">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
+<!DOCTYPE html>
 
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end slider section -->
-  </div>
+<html lang="en">
 
+<head>
 
-  <!-- service section -->
-  <section class="service_section layout_padding">
-    <div class="container">
-      <div class="service_container">
-        <div class="box active ">
-          <div class="img-box">
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>OnlineExam Platform | Landing Page</title>
 
-              <i class="fas fa-clipboard fs-1 grey-icon" style="font-size: 30px;" style="color: grey;"></i> 
-        </div>
-        
-            <div class="detail-box">
-                <h5>
-                    
-                      ATI TEAS 7 and HESI A2
-                </h5>
-                <p>
-                  
-                  90% Guaranteed.<a href=""> Get started now!</a>
-                </p>
-            </div>
-        </div>
-        <div class="box active">
-          <div class="img-box">
-              <i class="fas fa-user-nurse fs-1 "style="font-size: 30px;" style="color: grey;"></i>
-            
-        </div>
-        
-            <div class="detail-box">
-                <h5>
-                  Nursing Test Banks / Exit Exams
-                </h5>
-                <p>
-                  90% Guaranteed.  <a href="" > Get Started now!</a>
-                </p>
-            </div>
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="One page parallax responsive HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Bingo HTML Template v1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon"
+        href="{% static 'landing/images/favicon.png' %}" />
+
+    <!-- CSS
+  ================================================== -->
+    <!-- Themefisher Icon font -->
+    <link rel="stylesheet" href="{% static 'landing/plugins/themefisher-font/style.css' %}">
+    <!-- bootstrap.min css -->
+    <link rel="stylesheet" href="{% static 'landing/plugins/bootstrap/bootstrap.min.css' %}">
+    <!-- Lightbox.min css -->
+    <link rel="stylesheet"
+        href="{% static 'landing/plugins/lightbox2/css/lightbox.min.css' %}">
+    <!-- animation css -->
+    <link rel="stylesheet" href="{% static 'landing/plugins/animate/animate.css' %}">
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="{% static 'landing/plugins/slick/slick.css' %}">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'landing/css/style.css' %}">
+
+</head>
+
+<body id="body">
+
+    <!--
+  Start Preloader
+  ==================================== -->
+    <div id="preloader">
+        <div class='preloader'>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
-    
-    
-    <p style="text-align: justify;"> Trusted by over a million nurses, our TEAS TEST practice questions ensure top-notch preparation. Benefit from 100% relevant content, vivid imagery, and detailed explanations for correct and incorrect answers, setting you on the path to success in nursing entrance exams. Join the countless accepted students at leading U.S. colleges who have relied on our hallmark features.</p>
+    <!--
+  End Preloader
+  ==================================== -->
 
-    <h3>Pass the TEAS EXAM the First Time</h3>
-    <iframe width="900" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" frameborder="0" allowfullscreen></iframe><br>
-
-    <p style="text-align: justify;">Join our Facebook Teas 7 study community group and explore more customer reviews,
-      interact with fellow students and get more free tips, free materials & help on your exam
-    </p>
-    <a href="LINK_TO_YOUR_FACEBOOK_GROUP" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;">
-      Join Our Facebook Group Now
-  </a>
-  <br>
-  <br>
-  <br> 
-  <h3> Pass the HESI EXAM the First Time</h3>
-  <p style="text-align: justify;"> Our practice materials are meticulously crafted and curated by seasoned tutors who have successfully conquered the exam themselves. As you immerse yourself in our practice sessions, rest assured that you'll be equipped with an invaluable understanding of the actual exam's intricacies. Experience the confidence that comes from tackling questions and scenarios similar to those found in the real HESI exam, and embark on your journey towards nursing excellence with Naxlex by your side.
-
-  Written and prepared by tutors who have taken the exam before. With the assurance that questions you will get from taking our practice, you will get a grasp of the actual exam.
-  </p>
-  
-  <!-- <a><div class="text-center mt-50 mb-50 pt-4 pb-4 rounded" style="box-shadow: 0 0.05rem 1rem rgba(0,0,0,.15)!important;">
-    <div>
-        <h1>Naxlex is Rated Excellent</h1>
-        <p>Based on 37 reviews  Excellent</p>
-        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'%3E%3Cpath d='M12 2.6l3.5 7.3 7.9 1.2-5.7 5.6 1.3 7.9-6.9-3.6-6.9 3.6 1.3-7.9-5.7-5.6 7.9-1.2L12 2.6z'/%3E%3C/svg%3E" type="image/svg+xml">
-
-  </div>
-</div></a> -->
-
-</section>
-  <!-- end service section -->
-
-  <!-- about section -->
-  <section class="about_section layout_padding">
-    <div class="container">
-      <div class="row">
-        <div class="">
-          <div class="detail-box">
-           <h1 style="text-align: center;">Nursing Test Bank</h1>
-            <p style="text-align: justify;">
-               At Nursing Hub, we're dedicated to unparalleled excellence in nursing exam prep. Trusted by over a million nurses, our practice questions offer top-tier content, vivid imagery, and detailed explanations for both correct and incorrect answers. Written by experienced tutors who've aced the exam, our resources ensure you're well-prepared and confident for the real test.<br><br>
-
-                 The following are some of <strong>nursing test bank exams</strong>  extracted from the <strong> actual exams</strong>: 
-              </p>
-
-              <div>
-                <button class="btn btn-primary" style="margin-right: 40px;">Med Surgical Exams</button>
-                <button class="btn btn-primary" style="margin-right: 40px;">Pharmacology Exams</button>
-                <button class="btn btn-primary" style="margin-right: 40px;">Dosage Calculations Exams</button>
-                <button class="btn btn-primary">Maternal Newborn Exams</button>
-                <br><br>
-                <button class="btn btn-primary" style="margin-right: 40px;">Mental Health Exams</button>
-                <a href=""> View more</a>
-            </div>
-          </div>
-        </div>
-  
-
-        </div>
-
-      </div>
-    </div>
-    <ul class="nav nav-tabs" style="margin-left: 30px;">
-      <li class="nav-item">
-          <a class="nav-link active" href="#home" data-toggle="tab">Home</a>
-      </li>
-      <!-- <li class="nav-item">
-          <a class="nav-link" href="#menu1" data-toggle="tab">Menu 1</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" href="#menu2" data-toggle="tab">Menu 2</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" href="#menu3" data-toggle="tab">Menu 3</a>
-      </li> -->
-  </ul>
-  <br><br>
-  <div class="tab-content">
-      <div id="home" class="tab-pane active">
-          <div style="margin-left: 20px;">
-              <button class="btn btn-primary" style="margin-right: 40px;">Med Surgical Exams</button>
-              <button class="btn btn-primary" style="margin-right: 40px;">Pharmacology Exams</button>
-              <button class="btn btn-primary" style="margin-right: 40px;">Dosage Calculations Exams</button>
-              <button class="btn btn-primary">Maternal Newborn Exams</button>
-              <br><br>
-              <button class="btn btn-primary" style="margin-right: 40px;">Mental Health Exams</button>
-              <a href="">View more</a>
-          </div>
-      </div>
-      <div id="menu1" class="tab-pane fade">
-        <button class="btn btn-primary" style="margin-right: 40px;">Med Surgical Exams</button>
-        <button class="btn btn-primary" style="margin-right: 40px;">Pharmacology Exams</button>
-        <button class="btn btn-primary" style="margin-right: 40px;">Dosage Calculations Exams</button>
-        <button class="btn btn-primary">Maternal Newborn Exams</button>
-        <br><br>
-        <button class="btn btn-primary" style="margin-right: 40px;">Mental Health Exams</button>
-        <a href="">View more</a>
-      </div>
-      <div id="menu2" class="tab-pane fade">
-          <!-- Content for Menu 2 -->
-      </div>
-      <div id="menu3" class="tab-pane fade">
-          <!-- Content for Menu 3 -->
-      </div>
-  </div>
-
-    <br>
-  <h1 style="text-align: center;">Sign Up In Minutes. Try Nursinghub Nursing Risk-Free.</h1>
-
-  <div class="row">
-    <div class="col-md-4 mb-2">
-        <div class="card mt-4 maintenance-box" style="height: 100%; width: 80%; margin-left: 30px;">
-            <div class="card-body p-4">
-                <div class="text-center mx-auto mb-4">
-                    <h4 class="my-3">1</h4>
-                    <img src="https://www.naxlex.com/assets/images/create-account.svg" class="img-fluid">
-                </div>
-                <h5 class="font-size-15 text-muted text-center">Create an account</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-2">
-        <div class="card mt-4 maintenance-box" style="height: 100%; width: 80%;">
-            <div class="card-body p-4">
-                <div class="text-center mx-auto mb-4">
-                    <h4 class="my-3">2</h4>
-                    <img src="https://www.naxlex.com/assets/images/naxlex-free-trial.svg" class="img-fluid">
-                </div>
-                <h5 class="font-size-15 text-muted text-center">Test for free. No credit card required.</h5>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-2">
-        <div class="card mt-4 maintenance-box" style="height: 100%; width: 80%;">
-            <div class="card-body p-4">
-                <div class="text-center mx-auto mb-4">
-                    <h4 class="my-3">3</h4>
-                    <img src="https://www.naxlex.com/assets/images/naxlex-packages.svg" class="img-fluid">
-                </div>
-                <h5 class="font-size-15 text-muted text-center">Pick your package on our <a href="https://www.naxlex.com/nursing/register" target="_blank" previewlistener="true">pricing</a>.</h5>
-            </div>
-        </div>
-    </div>
-</div>
-<a href="" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;text-align: center;margin-left: 550px;margin-top: 30px;">
-  Sign Up  Now
-</a>
-
-<div class="row gx-6 pt-30" style="margin-top: 10px;">
-  <div class="col-xl-4 col-lg-4 col-md-6 col-12 wow tpfadeUp" data-wow-duration=".3s" data-wow-delay=".6s">
-      <div class="svcase text-center mb-50">
-          <div class="svcase__img fix">
-              <img src="{% static 'images/create-your-own-quiz.png' %}" loading="lazy" alt="create your own quiz" style="height: 40%;width: 90%;">
-          </div>
-          <div class="svcase__content">
-              <h4 class="sv-case-sm-title"><a href="https://naxlex.com/nursing/client/create-a-quiz" target="_blank" previewlistener="true">Create Your Own Quiz</a></h4>
-              <p style="margin-left: 20px;text-align: justify;">Create your own nursing quiz to test your knowledge, enhance learning, and reinforce key concepts in healthcare practice.</p>
-          </div>
-      </div>
-  </div>
-  <div class="col-xl-4 col-lg-4 col-md-6 col-12 wow tpfadeUp" data-wow-duration=".5s" data-wow-delay=".8s">
-      <div class="svcase text-center mb-50">
-          <div class="svcase__img fix">
-              <img src="{% static 'images/diabetes-mellitus.png' %}" loading="lazy" alt="diabetes mellitus" style="height: 40%; width: 90%;">
-          </div>
-          <div class="svcase__content">
-              <h4 class="sv-case-sm-title"><a href="https://naxlex.com/nursing/sub-topic/endocrine-systems-1695290106" target="_blank" previewlistener="true">Study Notes</a>
-              </h4>
-              <p style="text-align: justify;">Comprehensive study notes are an invaluable resource for nursing students, aiding in exam preparation and deepening understanding of essential healthcare topics.</p>
-          </div>
-      </div>
-  </div>
-  <div class="col-xl-4 col-lg-4 col-md-6 col-12 wow tpfadeUp" data-wow-duration=".7s" data-wow-delay=".9s">
-      <div class="svcase text-center mb-50">
-          <div class="svcase__img fix">
-              <img src="{% static 'images/rn-comprehensive-predictor.png' %}" loading="lazy" alt="rn comprehensive predictor" style="height: 40%; width: 90%;">
-          </div>
-          <div class="svcase__content">
-              <h4 class="sv-case-sm-title"><a href="https://naxlex.com/nursing/review-exam/questions/rn-comprehensive-predictor-1693313594" target="_blank" previewlistener="true">RN Comprehensive Predictor</a></h4>
-              <p style="text-align: justify;">The RN Comprehensive Predictor exam is a crucial assessment for nursing students, gauging their readiness and knowledge for successful practice as registered nurses.</p>
-          </div>
-      </div>
-  </div>
-</div>
-  </section>
-
-  <!-- end about section -->
-
-
-
-
-  <!-- blog section -->
-  <section>
-
-      <div class="tp-news-area black-bg fix" style="background-color: black;" >
+    <!--
+Fixed Navigation
+==================================== -->
+    <header class="navigation fixed-top">
         <div class="container">
-            <div class="row align-items-end flex-wrap-reverse flex-md-wrap">
-                <div class="col-xl-11 m-md-auto text-center">
-                    <div class="tp-news-letter-section-box-two pt-80 pb-80 wow tpfadeUp" data-wow-duration=".5s" data-wow-delay=".7s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.7s; animation-name: tpfadeUp;">
-                        <h4 class="tp-title fs-1 mt-10 mb-60 text-white">Can You Recall Nursinghub Questions  <br> After Taking The Exam?</h4>
-                        <p class="mb-3 text-white " style="text-align: justify;">
-                            Are you taking your exam soon? Earn 200 dollars for a 30 minutes call with us by sharing the questions you remember from the exam.
-                        </p>
-                        <p class="mb-3 text-white " style="text-align: justify;">
-                            Nursinghub recalls is the ability to remember the format, nature and structure of questions immediately  after taking the exam then our team expert formulates the best nclex review based on the actual questions and this will guarantee 100%  pass rate to candidates. 
-                        </p>
-                        <p class="mb-3 text-white " style="text-align: justify;">
-                            All personal information is kept 100% private and confidential and any personal information is deleted within from 72 hours upon receiving of the information.
-                        </p>
-                        <h5 class="tp-title fs-4 mt-50 mb-60 text-white">To qualify to be part of the program, fill the following form:</h5>
-                        <div class="card p-4">
-                            <form action="Get" method="post"  style="margin-bottom: 50px;">
-                                <input type="hidden" name="_token" value="YNBNNdun29cjNZmpqMtp4uIpzczMup8GBPcwTqse">                                <div class="row">
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-4 mt-3">
-                                    <input type="email" class="form-control" placeholder="Email" name="email">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-4 mt-3">
-                                    <input type="text" class="form-control" placeholder="Exam date" name="examdate">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-4 mt-3">
-                                    <input type="text" class="form-control" placeholder="Results(%)" name="result">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-6 mt-3">
-                                    <input type="text" class="form-control" placeholder="Phone number" name="phone">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-6 mt-3">
-                                    <!--<label for="formFile" class="form-label">File upload(accept only png, jpg or jpeg)</label>-->
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                        </form>
-                        </div>
+            <!-- main nav -->
+            <nav class="navbar navbar-expand-lg navbar-light px-0">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="">OnlineExam Platform</a>
+                    </li>
+                </ul>
+                <!-- /logo -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                    aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    </div>
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="navbar-nav ml-auto text-center">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#about">About Us</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% if request.user|user_belongs_to_admin_group %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin_view_dashboard' %}">Admin Dashboard</a>
+                        </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'dashboard' %}">My Dashboard</a>
+                            </li>
+                        {% endif %}
+
+                        {% else %}
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                        {% endif %}
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
+            <!-- /main nav -->
         </div>
-    </div>
-</section>
-
-<section>
-  <div class="container" style="margin-top: 20px;"> 
-    <div class="text-center">
-            <h4 class="tp-title fs-1 mt-50 mb-60 ">Navigate Your Course With Our Comprehensive Study Guides</h4>
-            <!--<span class="text-left">-->
-            <p>Unlock the full potential of your academic journey with our comprehensive study guides. Packed with expert insights, essential tips, and tailored strategies, it's your roadmap to success. Don't just study; navigate, excel, and conquer your educational goals.</p>
-            <p class="">Ready to empower your learning experience? Explore our study guides now and start your journey toward academic excellence! 🚀 <br>
-              <a href="" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;text-align: center;margin-left: 50px;margin-top: 30px;">
-                Learn more
-              </a>
-             </p>
-        </div>
-    
-    </div>
-</section>
-
-<div class="container">
-                    
-  <div class="row mt-45">
-      <div class="col-xl-12">
-          <div class="tp-project-section-box text-center pb-25">
-              <h2 class="tp-title fs-1">Our Premium Teas 7 &amp; Hesi A2 &amp; Nursing Packages</h2>
-              <p class="lead text-info fw-bold">This is not a subscription. Its one time payment!</p>
+    </header>
+    <!--
+End Fixed Navigation
+==================================== -->
+<!-- Hero Slider Section -->
+<div class="hero-slider">
+  <div class="slider-item th-fullpage hero-area" style="background-image: url(../../static/landing/images/slider/slider-bg-1.jpg);">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">Prepare for Success with OnlineExams</h1>
+                  <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">
+                      Excel in your exams and achieve your academic goals with our comprehensive online exam platform.
+                  </p>
+                  <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn btn-main" href="exam-services.html">Explore More</a>
+              </div>
           </div>
       </div>
   </div>
-  
-  <div class="row tp-gx-15 pb-0">
-  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
-      <div class="cpprice activee text-center mb-20">
-          <div class="cpprice__title">
-              <h3 class="cp-price-title">ATI TEAS 7 and HESI A2 Premium Package</h3>
-          </div>
-          <div class="cpprice__meta">
-              <span><b>$69<small class="fs-5">/30-day Access</small></b></span> 
-              <!--<div class="">-->
-              <!--    Offer expires in <span class="d-block text-danger fw-bold" id="clock"></span>-->
-              <!--</div>-->
-          </div>
-          <div class="cpprice__list text-start jobdetails__feature">
-              <ul>
-                  <li><i class="fal fa-check"></i> TEAS 7 &amp; HESI A2</li>
-                  <li><i class="fal fa-check"></i> Access to all subject's study guides. Well-detailed with an explanation</li>
-                  <li><i class="fal fa-check"></i> Performance tracking</li>
-                  <li><i class="fal fa-check"></i> Questions and well-detailed explanation</li>
-                  <li><i class="fal fa-check"></i> Video explanation</li>
-                  <li><i class="fal fa-check"></i> Detailed performance analysis available upon completion</li>
-                  <li><i class="fal fa-check"></i> 1250 questions with 99% accuracy prediction of real exam</li>
-                  <li><i class="fal fa-check"></i> 2 self-assessment practice 170 questions 309 minutes each</li>
-              </ul>
-          </div>
-          <div class="cpprice__button pt-5">
-              <a href="https://account.nursinghub.com/register?pt=p" class="tp-btn-yellow" previewlistener="true">Get Started Now <i class="fal fa-long-arrow-right"></i></a>
-          </div>
-      </div>
-  </div>
-  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
-      <div class="cpprice text-center mb-20">
-          <div class="cpprice__title">
-              <h3 class="cp-price-title">ATI TEAS 7 and HESI A2 Premium Plus Package</h3>
-          </div>
-          <div class="cpprice__meta">
-              <span><b>$189</b>/80-days Access, live videos included</span>
-          </div>
-          <div class="cpprice__list text-start jobdetails__feature">
-              <ul>
-                  <li><i class="fal fa-check"></i> TEAS 7 &amp; HESI A2</li>
-                  <li><i class="fal fa-check"></i> Access to all subject's study guides. Well-detailed with an explanation</li>
-                  <li><i class="fal fa-check"></i> Performance tracking</li>
-                  <li><i class="fal fa-check"></i> Questions and well-detailed explanations</li>
-                  <li><i class="fal fa-check"></i> video explanation</li>
-                  <li><i class="fal fa-check"></i> Detailed performance analysis available upon completion</li>
-                  <li><i class="fal fa-check"></i> 1250 questions with 99% accuracy prediction of real exam</li>
-                  <li><i class="fal fa-check"></i> 2 self-assessment practice 170 questions 309 minutes each</li>
-                  <li><i class="fal fa-check"></i> Live videos(maths &amp; science)</li>
-              </ul>
-          </div>
-          <div class="cpprice__button pt-5">
-              <a href="https://account.naxlex.com/register?pt=pp" class="tp-btn-yellow" previewlistener="true">Get Started Now <i class="fal fa-long-arrow-right"></i></a>
-          </div>
-      </div>
-  </div>
-  <div class="col-xl-4 col-lg-4 col-md-4 col-12">
-      <div class="cpprice text-center mb-20">
-          <div class="cpprice__title">
-              <h3 class="cp-price-title">Nursing Test Banks &amp;  EXIT EXAMS Package</h3>
-          </div>
-          <div class="cpprice__meta">
-              <span><b>$79</b>/60-days Access</span>
-          </div>
-          <div class="cpprice__list text-start jobdetails__feature pb-5">
-              <ul class="list-unstyled pb-5">
-                  <li><i class="fal fa-check"></i>  HESI EXIT &amp; ATI EXIT EXAMS</li>
-                  <li><i class="fal fa-check"></i> Comprehensive Nursing Curriculum</li>
-                  <li><i class="fal fa-check"></i> Interactive Learning Modules</li>
-                  <li><i class="fal fa-check"></i> Practice Quizzes and Exams</li>
-                  <li><i class="fal fa-check"></i> Expert Faculty and Instructors</li>
-                  <li><i class="fal fa-check"></i> Real-world Clinical Case Studies</li>
-                  <li><i class="fal fa-check"></i> Collaborative Learning Communities</li>
-                  <li><i class="fal fa-check"></i> Personalized Learning Paths</li>
-                  <li><i class="fal fa-check"></i> 24/7 Access to Course Materials</li>
-                  <li><i class="fal fa-check"></i> Continuing Education Resources</li>
-              </ul>
-          </div>
-          <div class="cpprice__button pt-5">
-              <a href="https://www.naxlex.com/nursing/register" class="tp-btn-yellow" previewlistener="true">Get Started Now <i class="fal fa-long-arrow-right"></i></a>
+  <div class="slider-item th-fullpage hero-area" style="background-image: url(../../static/landing/images/slider/slider-bg-2.jpg);">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h1 data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".1">Ace Your Exams with Confidence</h1>
+                  <p data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".5">
+                      OnlineExam Platform provides a secure and user-friendly environment for your exam preparation. Unlock your potential and succeed.
+                  </p>
+                  <a data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".8" class="btn btn-main" href="exam-services.html">Start Now</a>
+              </div>
           </div>
       </div>
   </div>
 </div>
 
-</div>
-
-  <!-- end blog section -->
-
-
-
-  <!-- contact section -->
-
-  <section class="contact_section layout_padding">
-    <div class="container ">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
-        <img src="{% static 'images/plug.png' %}" alt="">
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-6 col-lg-8">
+              <div class="title text-center">
+                  <h2>About OnlineExam Platform</h2>
+                  <p>Empowering Your Exam Success Journey</p>
+                  <div class="border"></div>
+              </div>
+          </div>
       </div>
-    </div>
-    <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <form action="">
-            <div>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" placeholder="Phone Number" />
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex ">
-              <button>
-                SEND
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <div class="map_container">
-            <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
-            </div>
+          <div class="col-lg-6 mb-5 mb-lg-0">
+              <img loading="lazy" src="{% static 'landing/images/about-us.jpg' %}" class="img-fluid" alt="OnlineExam Platform Image">
           </div>
-        </div>
+          <div class="col-lg-6">
+              <p>OnlineExam Platform is a leading online exam solution dedicated to providing innovative tools and resources for successful exam preparation.</p>
+              <p>Our platform offers:</p>
+              <ul class="feature-list">
+                  <li> <i class="tf-ion-android-checkmark-circle"></i> Exam Strategies</li>
+                  <li> <i class="tf-ion-android-checkmark-circle"></i> Practice Tests</li>
+                  <li> <i class="tf-ion-android-checkmark-circle"></i> Performance Analytics</li>
+                  <li> <i class="tf-ion-android-checkmark-circle"></i> Timed Mock Exams</li>
+                  <li> <i class="tf-ion-android-checkmark-circle"></i> Exam Resources</li>
+              </ul>
+              <a href="contact.html" class="btn btn-main mt-20">Explore Our Services</a>
+          </div>
       </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- end contact section -->
+<!-- Call To Action Section -->
+<section class="call-to-action-2 section">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12 text-center">
+              <h2>Unlock Your Exam Success Today!</h2>
+              <p>Experience the Future of Online Exams with OnlineExam Platform</p>
+              <div class="border"></div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-6 col-lg-8">
+              <div class="title text-center">
+                  <h2>Exam Packages</h2>
+                  <p>Select Your Exam Preparation Plan</p>
+                  <div class="border"></div>
+              </div>
+          </div>
+      </div>
+      <div class="row no-gutters">
+          <!-- Exam Preparation Packages -->
+          <!-- Basic Package -->
+          <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+              <div class="service-block p-4 color-bg text-center">
+                  <div class="service-icon text-center">
+                      <i class="tf-ion-ios-copy-outline"></i>
+                  </div>
+                  <h3>Basic Package</h3>
+                  <p>📚 Access to Basic Study Materials</p>
+                  <p>📅 30 Days of Exam Preparation</p>
+                  <p>Total: $20</p>
+                  <!-- Add other package details as needed -->
+              </div>
+          </div>
+
+          <!-- Standard Package -->
+          <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+              <div class="service-block p-4 text-center">
+                  <div class="service-icon text-center">
+                      <i class="tf-ion-ios-alarm-outline"></i>
+                  </div>
+                  <h3>Standard Package</h3>
+                  <p>📚 Comprehensive Study Materials</p>
+                  <p>📅 60 Days of Exam Preparation</p>
+                  <p>Total: $50</p>
+                  <!-- Add other package details as needed -->
+              </div>
+          </div>
+
+          <!-- Advanced Package -->
+          <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+              <div class="service-block p-4 color-bg text-center">
+                  <div class="service-icon text-center">
+                      <i class="tf-ion-ios-book-outline"></i>
+                  </div>
+                  <h3>Advanced Package</h3>
+                  <p>📚 Advanced Study Materials & Practice Tests</p>
+                  <p>📅 90 Days of Exam Preparation</p>
+                  <p>Total: $80</p>
+                  <!-- Add other package details as needed -->
+              </div>
+          </div>
+
+          <!-- Premium Package -->
+          <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+              <div class="service-block p-4 text-center">
+                  <div class="service-icon text-center">
+                      <i class="tf-ion-ios-alarm-outline"></i>
+                  </div>
+                  <h3>Premium Package</h3>
+                  <p>📚 Premium Study Materials, Mock Exams</p>
+                  <p>📅 120 Days of Exam Preparation</p>
+                  <p>Total: $120</p>
+                  <!-- Add other package details as needed -->
+              </div>
+          </div>
+
+          <!-- Custom Package -->
+          <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+              <div class="service-block p-4 color-bg text-center">
+                  <div class="service-icon text-center">
+                      <i class="tf-ion-ios-book-outline"></i>
+                  </div>
+                  <h3>Custom Package</h3>
+                  <p>📚 Tailored Study Materials & Personalized Support</p>
+                  <p>📅 Custom Duration</p>
+                  <p>Total: Custom Pricing</p>
+                  <!-- Add other package details as needed -->
+              </div>
+          </div>
+
+          <!-- Add more packages as needed -->
+
+      </div> <!-- End row -->
+  </div> <!-- End container -->
+</section> <!-- End section -->
+
+<!-- Call To Action Section -->
+<section class="call-to-action section">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-6 col-lg-8 text-center">
+              <h2>Let's Excel in Online Exams Together</h2>
+              <p>Ready to enhance your educational experience? Partner with us for innovative solutions and outstanding outcomes in online exams.</p>
+              <a href="contact.html" class="btn btn-main">Contact Us</a>
+          </div>
+      </div> <!-- End row -->
+  </div> <!-- End container -->
+</section> <!-- End section -->
+
+<!-- Success Metrics Section -->
+<section class="counter-wrapper section-sm">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-6 col-lg-8 text-center">
+              <div class="title">
+                  <h2>Experience Our Online Exam Success Metrics</h2>
+                  <p>Unlocking Success with Our Award-Winning Strategies and Dedicated Team</p>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <!-- Happy Online Students -->
+          <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+              <div class="counters-item">
+                  <i class="tf-ion-ios-alarm-outline"></i>
+                  <div>
+                      <span class="counter" data-count="150">0</span>
+                  </div>
+                  <h3>Happy Online Students</h3>
+              </div>
+          </div>
+
+          <!-- Online Exams Completed -->
+          <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+              <div class="counters-item">
+                  <i class="tf-ion-ios-analytics-outline"></i>
+                  <div>
+                      <span class="counter" data-count="130">0</span>
+                  </div>
+                  <h3>Online Exams Completed</h3>
+              </div>
+          </div>
+
+          <!-- Positive Feedback from Online Exams -->
+          <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+              <div class="counters-item">
+                  <i class="tf-ion-ios-compose-outline"></i>
+                  <div>
+                      <span class="counter" data-count="99">0</span>
+                  </div>
+                  <h3>Positive Feedback from Online Exams</h3>
+              </div>
+          </div>
+
+          <!-- Cups of Virtual Coffee -->
+          <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+              <div class="counters-item kill-border">
+                  <i class="tf-ion-ios-bolt-outline"></i>
+                  <div>
+                      <span class="counter" data-count="250">0</span>
+                  </div>
+                  <h3>Cups of Virtual Coffee</h3>
+              </div>
+          </div>
+      </div> <!-- End row -->
+  </div> <!-- End container -->
+</section> <!-- End section -->
+
+<!-- Testimonial Section -->
+<section class="testimonial section" id="testimonial">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="testimonial-slider">
+                  <!-- Online Exam Success Story 1 -->
+                  <div class="item text-center">
+                      <i class="tf-ion-chatbubbles"></i>
+                      <div class="client-details">
+                          <p>“The Online Exam Platform has been exceptional in providing a seamless exam experience. Their dedication to top-notch solutions is unparalleled. I'm glad we chose them!”</p>
+                      </div>
+                      <div class="client-thumb">
+                          <img loading="lazy" src="{% static 'landing/images/client-logo/clients-1.jpg' %}" class="img-fluid" alt="William Martin">
+                      </div>
+                      <div class="client-meta">
+                          <h3>William Martin</h3>
+                          <span>CEO, EduTech Solutions Inc.</span>
+                      </div>
+                  </div>
+
+                  <!-- Online Exam Success Story 2 -->
+                  <div class="item text-center">
+                      <i class="tf-ion-chatbubbles"></i>
+                      <div class="client-details">
+                          <p>“Working with the Online Exam Platform has been transformative. Their innovative strategies and support have played a crucial role in our students' success stories!”</p>
+                      </div>
+                      <div class="client-thumb">
+                          <img loading="lazy" src="{% static 'landing/images/client-logo/clients-2.jpg' %}" class="img-fluid" alt="Emma Harrison">
+                      </div>
+                      <div class="client-meta">
+                          <h3>Emma Harrison</h3>
+                          <span>CEO, LearnSmart Academy</span>
+                      </div>
+                  </div>
+
+                  <!-- Online Exam Success Story 3 -->
+                  <div class="item text-center">
+                      <i class="tf-ion-chatbubbles"></i>
+                      <div class="client-details">
+                          <p>“The Online Exam Platform has exceeded our expectations. Their expertise in providing virtual exam services has been pivotal in the success of our educational programs.”</p>
+                      </div>
+                      <div class="client-thumb">
+                          <img loading="lazy" src="{% static 'landing/images/client-logo/clients-3.jpg' %}" class="img-fluid" alt="Alexander Lucas">
+                      </div>
+                      <div class="client-meta">
+                          <h3>Alexander Lucas</h3>
+                          <span>CEO, E-Learning Solutions Ltd.</span>
+                      </div>
+                  </div>
+              </div>
+          </div> <!-- End col-lg-12 -->
+      </div> <!-- End row -->
+  </div> <!-- End container -->
+</section> <!-- End Section -->
+<!-- Contact Us Section -->
+<section class="contact-us" id="contact">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-6 col-lg-8">
+              <div class="title text-center">
+                  <h2>Contact OnlineExam Platform</h2>
+                  <p>For any inquiries or information, feel free to reach out to us. We're here to assist you!</p>
+                  <div class="border"></div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <!-- Contact Details -->
+          <div class="contact-details col-md-6">
+              <h3 class="mb-3">Contact Details</h3>
+              <p>Get in touch with OnlineExam Platform using the following contact information:</p>
+              <ul class="contact-short-info mt-4">
+                  <li class="mb-3">
+                      <i class="tf-ion-ios-home"></i>
+                      <span>123 OnlineExam Platform, Nairobi, Kenya</span>
+                  </li>
+                  <li class="mb-3">
+                      <i class="tf-ion-android-phone-portrait"></i>
+                      <span>Phone: +254725470732</span>
+                  </li>
+                  <li class="mb-3">
+                      <i class="tf-ion-android-globe"></i>
+                      <span>Fax: +254725470732</span>
+                  </li>
+                  <li>
+                      <i class="tf-ion-android-mail"></i>
+                      <span>Email: contact@onlineexamplatform.com</span>
+                  </li>
+              </ul>
+              <!-- Footer Social Links -->
+              <div class="social-icon">
+                  <ul>
+                      <li><a href="#"><i class="tf-ion-social-facebook"></i></a></li>
+                      <li><a href="#"><i class="tf-ion-social-twitter"></i></a></li>
+                      <li><a href="#"><i class="tf-ion-social-dribbble-outline"></i></a></li>
+                      <li><a href="#"><i class="tf-ion-social-linkedin-outline"></i></a></li>
+                  </ul>
+              </div>
+              <!--/. End Footer Social Links -->
+          </div>
+          <!-- / End Contact Details -->
+
+          <!-- Contact Form -->
+          <div class="contact-form col-md-6">
+              <form id="contact-form" method="post" role="form">
+                  <div class="form-group mb-4">
+                      <input type="text" placeholder="Your Name" class="form-control" name="name" id="name" required>
+                  </div>
+
+                  <div class="form-group mb-4">
+                      <input type="email" placeholder="Your Email" class="form-control" name="email" id="email" required>
+                  </div>
+
+                  <div class="form-group mb-4">
+                      <input type="text" placeholder="Subject" class="form-control" name="subject" id="subject" required>
+                  </div>
+
+                  <div class="form-group mb-4">
+                      <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message" required></textarea>
+                  </div>
+                  <div id="cf-submit">
+                      <input type="submit" id="contact-submit" class="btn btn-transparent" value="Submit">
+                  </div>
+              </form>
+          </div>
+          <!-- ./End Contact Form -->
+      </div> <!-- end row -->
+  </div> <!-- end container -->
+</section> <!-- end section -->
+
+<!-- Google Map Section -->
+<div class="google-map">
+  <div data-aos="fade-up">
+      <iframe style="border:0; width: 100%; height: 350px;"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.1154883936865!2d-77.47644852416545!3d37.552342772042245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b113e3319a403d%3A0xa7e44d6fd2b2c5ab!2s2618%20W%20Main%20St%2C%20Richmond%2C%20VA%2023220!5e0!3m2!1sen!2sus!4v1697093001180!5m2!1sen!2sus"
+          frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+<!-- End Google Map Section -->
+
+<!-- Footer Section -->
+<footer id="footer" class="bg-one">
+  <div class="top-footer">
+      <div class="container">
+          <div class="row justify-content-around">
+              <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                  <h3>About OnlineExam Platform</h3>
+                  <p>OnlineExam Platform is a premier educational institution committed to providing innovative online exam solutions and exceptional services to empower students and educators, fostering academic growth.</p>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                  <ul>
+                      <li><h3>Our Services</h3></li>
+                      <li><a href="online-exams.html">Online Exams</a></li>
+                      <li><a href="exam-preparation.html">Exam Preparation</a></li>
+                      <li><a href="educational-resources.html">Educational Resources</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                  <ul>
+                      <li><h3>Quick Links</h3></li>
+                      <li><a href="#about">About</a></li>
+                      <li><a href="#services">Services</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                      <li><a href="">FAQ</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                  <ul>
+                      <li><h3>Connect with us</h3></li>
+                      <li><a href="https://www.facebook.com/onlineexamplatform/">Facebook</a></li>
+                      <li><a href="https://www.twitter.com/onlineexamplatform/">Twitter</a></li>
+                      <li><a href="https://www.linkedin.com/company/onlineexamplatform/">LinkedIn</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div> <!-- end container -->
+  </div>
+  <div class="footer-bottom">
+      <h5>&copy; Copyright 2023 OnlineExam Platform. All rights reserved.</h5>
+      <h6>Website designed and developed for OnlineExam Platform</h6>
+  </div>
+</footer>
+<!-- End of Footer Section -->
 
 
+    <!-- end Footer Area
+========================================== -->
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    <!-- Main jQuery -->
+    <script src="{% static 'landing/plugins/jquery/jquery.min.js' %}"></script>
 
-  
+    <!-- Bootstrap4 -->
+    <script src="{% static 'landing/plugins/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- Parallax -->
+    <script src="{% static 'landing/plugins/parallax/jquery.parallax-1.1.3.js' %}"></script>
+    <!-- lightbox -->
+    <script src="{% static 'landing/plugins/lightbox2/js/lightbox.min.js' %}"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static 'landing/plugins/slick/slick.min.js' %}"></script>
+    <!-- filter -->
+    <script src="{% static 'landing/plugins/filterizr/jquery.filterizr.min.js' %}"></script>
+    <!-- Smooth Scroll js -->
+    <script src="{% static 'landing/plugins/smooth-scroll/smooth-scroll.min.js' %}"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU"></script>
+    <script src="{% static 'landing/plugins/google-map/gmap.js' %}"></script>
 
-{% endblock %}
+    <!-- Custom js -->
+    <script src="{% static 'landing/js/script.js' %}"></script>
+
+</body>
+
+</html>

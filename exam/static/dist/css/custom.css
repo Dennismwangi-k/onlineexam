@@ -1,0 +1,56 @@
+.small-box {
+    position: relative;
+    display: block;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: #fff;
+    border: none;
+    color: #555;
+  }
+
+  .small-box .inner {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .small-box h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+/* CSS for the loader */
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust height as needed */
+}
+
+/* Loader animation */
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Animation duration */
+}
+
+/* Loader animation keyframes */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-pointer {
+  cursor: default !important;
+}
+
+.add-pointer {
+  cursor: pointer !important;
+}
