@@ -40,6 +40,14 @@ urlpatterns = [
     path('blog', app_views.blog, name='blog'),
     path('test', app_views.test, name='test'),
 
+    ##Admin Views
+    path('dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
+    path('add_question/', admin_views.add_question, name='admin_add_question'),
+    path('edit_question/<str:question_id>/', admin_views.edit_question, name='admin_edit_question'),
+    path('delete_question/<str:question_id>/', admin_views.delete_question, name='admin_delete_question'),
+    path('view_users/', admin_views.view_users, name='admin_view_users'),
+    path('delete_user/<str:user_id>/', admin_views.delete_user, name='admin_delete_user'),
+
 ]
 if settings.DEBUG:
   urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
