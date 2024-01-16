@@ -49,7 +49,7 @@ urlpatterns = [
     path('customadmin/all_users/', admin_views.all_users, name='admin_view_all_users'),
     path('customadmin/active_users/', admin_views.active_users, name='admin_view_active_users'),
     path('customadmin/dormant_users/', admin_views.dormant_users, name='admin_view_dormant_users'),
-
+    path('customadmin/update_user/<str:user_id>', admin_views.update_user,name='admin_update_user'),
     path('customadmin/delete_user/<str:user_id>/', admin_views.delete_user, name='admin_delete_user'),
 
 ]

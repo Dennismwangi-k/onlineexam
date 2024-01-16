@@ -102,9 +102,8 @@ def delete_user(request, user_id):
     user = get_object_or_404(ExamUser, pk=user_id)
     if user:
         user.delete()
-        return redirect('admin_dashboard')
-    messages.success(request, f'User deleted!')
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+        messages.success(request, f'User deleted!')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
 @admin_only
@@ -126,4 +125,4 @@ def update_user(request, user_id):
       "update_user_form":update_user_form,
       "user":user
   }
-  return render(request, 'admin/update_user.html', context)
+  return render(request, 'customadmin/update_user.html', context)

@@ -1,0 +1,40 @@
+{% extends "customadmin/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Edit User <span class="text-primary">{{user.username}}</span></h3>
+                </div>
+                <!-- /.card-header -->
+
+                <div class="card-body">
+                    <hr>
+                    <form class="forms" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form update_user_form %}
+        
+                        <div class="form-group mt-4">
+                            <div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+{{ form.media }}
+{% endblock %}
+
+
+

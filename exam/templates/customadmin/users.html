@@ -51,7 +51,7 @@
                                         <strong>Active</strong>
                                     {% endif %}
                                     </td>
-                                    <td><a href="{% url 'update_user' user.id %}" class="btn btn-warning">
+                                    <td><a href="{% url 'admin_update_user' user.pk %}" class="btn btn-warning">
                                         Update</a></td>
                                     <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-user-{{user.id}}">Delete
                                     </button></td>               
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                          <a href="{% url 'delete_user' user.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                                          <a href="{% url 'admin_delete_user' user.pk %}"><button type="submit" class="btn btn-danger">Delete</button></a>
                                         </div>
                                       </div>
                                       <!-- /.modal-content -->
