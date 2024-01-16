@@ -26,7 +26,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class AdminProfileUpdateForm(forms.ModelForm):
     class Meta:
         model =ExamUser
-        fields = ['first_name', 'last_name', 'email', 'username', 'phone','profile_picture']
+        fields = ['first_name', 'last_name', 'email', 'username', 'phone','is_active']
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     class Meta:

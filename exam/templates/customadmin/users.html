@@ -21,22 +21,62 @@
                                     <th>Last Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Time Joined</th>
-                                    <th>Delete</th>      
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>   
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for user in users %}
-                                    <tr>
-                                        <td>{{ user.first_name }}</td>
-                                        <td>{{ user.last_name }}</td>
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.phone }}</td>
-                                        <td>{{ user.date_joined|timesince }} ago</td>
-                                        <td></td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td class="text-capitalize">
+                                        {% if user.groups.all %}
+                                          {% for group in user.groups.all %}
+                                            {{ group.name|capfirst }}
+                                            {% if not forloop.last %}, {% endif %}
+                                          {% endfor %}
+                                        {% else %}
+                                          None
+                                        {% endif %}
+                                    </td>
+                                    <td> 
+                                    {% if not user.is_active %}
+                                        <strong>Not Active</strong>
+                                        {% else %}
+                                        <strong>Active</strong>
+                                    {% endif %}
+                                    </td>
+                                    <td><a href="{% url 'update_user' user.id %}" class="btn btn-warning">
+                                        Update</a></td>
+                                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-user-{{user.id}}">Delete
+                                    </button></td>               
+                                </tr>
+                                <div class="modal fade" id="delete-user-{{user.id}}">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Delete user  {{user.username}}</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p>Are you sure you want to delete this user?</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                          <a href="{% url 'delete_user' user.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                                        </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                  </div>
                                 {% endfor %}
                             </tbody>
                             <tfoot>
@@ -45,9 +85,10 @@
                                     <th>Last Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Time Joined</th>
-                                    <th>Delete</th>      
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>     
                                 </tr>
                             </tfoot>
                         </table>
