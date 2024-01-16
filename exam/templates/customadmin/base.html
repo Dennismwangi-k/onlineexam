@@ -94,9 +94,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{% url 'admin_view_users' %}" class="nav-link">
+                <a href="{% url 'admin_view_active_users' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Users</p>
+                  <p>Active Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'admin_view_dormant_users' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dormant Users</p>
                 </a>
               </li>
             </ul>
