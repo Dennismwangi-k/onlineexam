@@ -103,5 +103,27 @@ def delete_user(request, user_id):
     if user:
         user.delete()
         return redirect('admin_dashboard')
-    context = {'user': user}
-    return render(request, 'customadmin/delete_user.html', context)
+    messages.success(request, f'User deleted!')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
+@admin_only
+def update_user(request, user_id):
+  user = ExamUser.objects.get(pk=user_id)
+  if request.method == 'POST':
+    update_user_form = AdminProfileUpdateForm(request.POST,request.FILES, instance=user)
+    if update_user_form.is_valid():
+      update_user_form.save()
+      messages.success(request, f'User updated!')
+      previous_url = request.session.get('previous_url')
+      if previous_url:
+          del request.session['previous_url']
+          return redirect(previous_url)
+  else:
+    update_user_form = AdminProfileUpdateForm(instance=user)
+    request.session['previous_url'] = request.META.get('HTTP_REFERER')
+  context = {
+      "update_user_form":update_user_form,
+      "user":user
+  }
+  return render(request, 'admin/update_user.html', context)
