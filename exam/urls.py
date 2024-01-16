@@ -41,12 +41,16 @@ urlpatterns = [
     path('test', app_views.test, name='test'),
 
     ##Admin Views
-    path('dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
-    path('add_question/', admin_views.add_question, name='admin_add_question'),
-    path('edit_question/<str:question_id>/', admin_views.edit_question, name='admin_edit_question'),
-    path('delete_question/<str:question_id>/', admin_views.delete_question, name='admin_delete_question'),
-    path('view_users/', admin_views.view_users, name='admin_view_users'),
-    path('delete_user/<str:user_id>/', admin_views.delete_user, name='admin_delete_user'),
+    path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
+    path('customadmin/add_question/', admin_views.add_question, name='admin_add_question'),
+    path('customadmin/edit_question/<str:question_id>/', admin_views.edit_question, name='admin_edit_question'),
+    path('customadmin/delete_question/<str:question_id>/', admin_views.delete_question, name='admin_delete_question'),
+
+    path('customadmin/all_users/', admin_views.all_users, name='admin_view_all_users'),
+    path('customadmin/active_users/', admin_views.active_users, name='admin_view_active_users'),
+    path('customadmin/dormant_users/', admin_views.dormant_users, name='admin_view_dormant_users'),
+
+    path('customadmin/delete_user/<str:user_id>/', admin_views.delete_user, name='admin_delete_user'),
 
 ]
 if settings.DEBUG:
