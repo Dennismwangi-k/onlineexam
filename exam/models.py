@@ -42,6 +42,8 @@ class Questions(models.Model):
     question_text = models.CharField(max_length=100)
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
     question_type = models.CharField(max_length=10)
+    answer_explanation = models.TextField()
+    exam_id = models.ForeignKey("Exam", on_delete=models.CASCADE , null=True, blank=True)
 
 
     def __str__(self):
@@ -57,3 +59,19 @@ class QuestionAnswers(models.Model):
         return self.answer_id
 
 
+class Exam(models.Model):
+    DURATION_CHOICES = [
+        ('30', '30 minutes'),
+        ('60', '1 hour'),
+        ('90', '1 hour 30 minutes'),
+        ('120', '2 hours'),
+    ]
+
+    exam_id = models.CharField(max_length=10, primary_key=True)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    exam_name = models.CharField(max_length=100)
+    description = models.CharField(max_length=255)
+    duration = models.CharField(max_length=3, choices=DURATION_CHOICES)
+
+    def __str__(self):
+        return self.exam_id
