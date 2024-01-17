@@ -16,8 +16,8 @@ from exam.decorators import admin_only
 @admin_only
 def admin_dashboard(request):
     total_users_count = ExamUser.objects.all().count()
-    active_users_count = ExamUser.objects.all().filter(is_active=False).count()
-    dormant_users_count = ExamUser.objects.all().filter(is_active=True).count()
+    active_users_count = ExamUser.objects.all().filter(is_active=True).count()
+    dormant_users_count = ExamUser.objects.all().filter(is_active=False).count()
 
     context = {
         'total_users_count': total_users_count,
