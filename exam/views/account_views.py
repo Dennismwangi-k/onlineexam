@@ -46,7 +46,7 @@ def login(request):
       if user is not None:
         auth_login(request, user)
         if user.groups.filter(name="Admin").exists():
-            return redirect('admin_view_dashboard')
+            return redirect('admin_dashboard')
         else:
             return redirect('exam')
 

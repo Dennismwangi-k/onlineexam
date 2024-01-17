@@ -91,19 +91,18 @@ Fixed Navigation
                             <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         {% if request.user.is_authenticated %}
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
                         {% if request.user|user_belongs_to_admin_group %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_view_dashboard' %}">Admin Dashboard</a>
+                            <a class="nav-link" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
                         </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'dashboard' %}">My Dashboard</a>
+                                <a class="nav-link" href="{% url 'exam' %}">Exam</a>
                             </li>
                         {% endif %}
-
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
                         {% else %}
                         <li class="nav-item ">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
