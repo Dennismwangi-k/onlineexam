@@ -25,10 +25,16 @@
                 <button class="btn btn-navbar" type="button" data-widget="navbar-search">
                   <i class="fas fa-times"></i>
                 </button>
+                
               </div>
             </div>
           </form>
         </div>
+        {% if request.user.is_superuser %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+        </li>
+        {% endif %}
       </li>
     </ul>
   </nav>
