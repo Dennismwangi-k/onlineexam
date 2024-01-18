@@ -42,9 +42,6 @@ urlpatterns = [
 
     ##Admin Views
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
-    path('customadmin/add_question/', admin_views.add_question, name='admin_add_question'),
-    path('customadmin/edit_question/<int:question_id>/', admin_views.edit_question, name='admin_edit_question'),
-    path('customadmin/delete_question/<int:question_id>/', admin_views.delete_question, name='admin_delete_question'),
 
     path('customadmin/course_list/', admin_views.course_list, name='admin_course_list'),
     path('customadmin/add_course/', admin_views.add_course, name='admin_add_course'),
@@ -56,6 +53,10 @@ urlpatterns = [
     path('customadmin/edit_exam/<int:exam_id>/', admin_views.edit_exam, name='admin_edit_exam'),
     path('customadmin/delete_exam/<int:exam_id>/', admin_views.delete_exam, name='admin_delete_exam'),
 
+    path('customadmin/question_list/<int:exam_id>', admin_views.question_list, name='admin_question_list'),
+    path('customadmin/add_question/<int:exam_id>', admin_views.add_question, name='admin_add_question'),
+    path('customadmin/edit_question/<int:question_id>/', admin_views.edit_question, name='admin_edit_question'),
+    path('customadmin/delete_question/<int:question_id>/', admin_views.delete_question, name='admin_delete_question'),
 
     path('customadmin/all_users/', admin_views.all_users, name='admin_view_all_users'),
     path('customadmin/active_users/', admin_views.active_users, name='admin_view_active_users'),

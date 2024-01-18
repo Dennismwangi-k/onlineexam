@@ -43,7 +43,7 @@ class Questions(models.Model):
 
 
     def __str__(self):
-        return self.question_id
+        return self.question_text
     
 class QuestionAnswers(models.Model):
     question = models.ForeignKey(Questions, on_delete=models.CASCADE)
@@ -51,7 +51,7 @@ class QuestionAnswers(models.Model):
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.answer_id
+        return self.answer_text
 
 
 class Exam(models.Model):

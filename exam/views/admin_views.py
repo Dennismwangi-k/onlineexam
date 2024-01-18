@@ -193,54 +193,63 @@ def delete_exam(request, exam_id):
 
 @login_required
 @admin_only
-def question_list(request):
-    questions = Questions.objects.all()
-    return render(request, 'customadmin/question_list.html', {'questions': questions})
+def question_list(request,exam_id):
+    questions = Questions.objects.filter(exam_id=exam_id)
+    return render(request, 'customadmin/question_list.html', {'questions': questions,"exam_id":exam_id})
 
 @login_required
 @admin_only
-def add_question(request):
+def add_question(request, exam_id):
+    exam = get_object_or_404(Exam, id=exam_id)
+    
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         formset = QuestionAnswerFormSet(request.POST, queryset=QuestionAnswers.objects.none())
 
         if form.is_valid() and formset.is_valid():
-            question = form.save()
+            question = form.save(commit=False)
+            question.exam = exam
+            question.course = exam.course
+            question.save()
+
             answers = formset.save(commit=False)
             for answer in answers:
-                answer.question_id = question
+                answer.question = question
                 answer.save()
 
-            return redirect('question_list')
+            return redirect('admin_question_list', exam_id=exam_id)
     else:
         form = QuestionForm()
         formset = QuestionAnswerFormSet(queryset=QuestionAnswers.objects.none())
 
-    context = {'form': form, 'formset': formset}
+    context = {'form': form, 'formset': formset, 'exam': exam}
     return render(request, 'customadmin/add_question.html', context)
 
 @login_required
 @admin_only
 def edit_question(request, question_id):
     question = get_object_or_404(Questions, pk=question_id)
+    
     if request.method == 'POST':
         form = QuestionForm(request.POST, instance=question)
-        formset = QuestionAnswerFormSet(request.POST, queryset=question.questionanswers_set.all())
+        formset = QuestionAnswerFormSet(request.POST, instance=question, queryset=question.questionanswers_set.all())
 
         if form.is_valid() and formset.is_valid():
             question = form.save()
+
             answers = formset.save(commit=False)
             for answer in answers:
-                answer.question_id = question
+                answer.question = question
                 answer.save()
 
-            return redirect('question_list')
+            return redirect('admin_question_list', exam_id=question.exam.id)
     else:
         form = QuestionForm(instance=question)
-        formset = QuestionAnswerFormSet(queryset=question.questionanswers_set.all())
+        formset = QuestionAnswerFormSet(instance=question, queryset=question.questionanswers_set.all())
 
     context = {'form': form, 'formset': formset, 'question': question}
     return render(request, 'customadmin/edit_question.html', context)
+
 
 
 

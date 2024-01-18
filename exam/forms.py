@@ -70,10 +70,21 @@ class CourseForm(forms.ModelForm):
         fields = '__all__'
 
 class AnswerForm(forms.ModelForm):
+    is_correct = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        label='Mark as Correct Answer'
+    )
+
     class Meta:
         model = QuestionAnswers
-        fields = '__all__'
-
+        fields = ['answer_text', 'is_correct']
+        labels = {
+            'answer_text': 'Answer Text',
+        }
+        widgets = {
+            'answer_text': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class QuestionAnswerFormSet(forms.BaseInlineFormSet):
@@ -91,7 +102,7 @@ class QuestionAnswerFormSet(forms.BaseInlineFormSet):
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Questions
-        fields = ['question_text', 'course', 'question_type', 'answer_explanation', 'exam']
+        fields = ['question_text','question_type', 'answer_explanation']
 
 QuestionAnswerFormSet = forms.inlineformset_factory(
     Questions,
