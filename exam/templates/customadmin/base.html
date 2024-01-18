@@ -107,6 +107,52 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Courses
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'admin_course_list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Courses</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'admin_add_course' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Course</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Exam
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'admin_exam_list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Exams</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'admin_add_exam' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Exam</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="{% url 'profile' %}" class="nav-link">
