@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth.models import Group
 
 
 def allowed_users(allowed_roles=[]):
@@ -19,13 +20,10 @@ def allowed_users(allowed_roles=[]):
 
 def admin_only(view_func):
   def wrapper_func(request, *args, **kwargs):
-    
-    group = None
-    if request.user.groups.exists():
-      group = request.user.groups.all()[0].name
 
-    if group == 'Admin':
+    if request.user.is_superuser:
       return view_func(request, *args, **kwargs)
+    
 
     else:
       return HttpResponse('You are not authorized to view this page!!')
