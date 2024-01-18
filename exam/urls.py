@@ -16,7 +16,7 @@ urlpatterns = [
 
         ## Account views
     path('accounts/register/', account_views.register, name='register'),
-    path('accounts/register/<str:invited_by_username>/', account_views.register, name='register_invited'),
+    path('accounts/register/<int:invited_by_username>/', account_views.register, name='register_invited'),
     path('accounts/login/',account_views.login,name='login'),
     path('accounts/logout/',account_views.logout_view,name='logout'),
     path('accounts/profile/',account_views.profile,name='profile'),
@@ -42,15 +42,27 @@ urlpatterns = [
 
     ##Admin Views
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
-    path('customadmin/add_question/', admin_views.add_question, name='admin_add_question'),
-    path('customadmin/edit_question/<str:question_id>/', admin_views.edit_question, name='admin_edit_question'),
-    path('customadmin/delete_question/<str:question_id>/', admin_views.delete_question, name='admin_delete_question'),
+
+    path('customadmin/course_list/', admin_views.course_list, name='admin_course_list'),
+    path('customadmin/add_course/', admin_views.add_course, name='admin_add_course'),
+    path('customadmin/edit_course/<int:course_id>/', admin_views.edit_course, name='admin_edit_course'),
+    path('customadmin/delete_course/<int:course_id>/', admin_views.delete_course, name='admin_delete_course'),
+
+    path('customadmin/exam_list/', admin_views.exam_list, name='admin_exam_list'),
+    path('customadmin/add_exam/', admin_views.add_exam, name='admin_add_exam'),
+    path('customadmin/edit_exam/<int:exam_id>/', admin_views.edit_exam, name='admin_edit_exam'),
+    path('customadmin/delete_exam/<int:exam_id>/', admin_views.delete_exam, name='admin_delete_exam'),
+
+    path('customadmin/question_list/<int:exam_id>', admin_views.question_list, name='admin_question_list'),
+    path('customadmin/add_question/<int:exam_id>', admin_views.add_question, name='admin_add_question'),
+    path('customadmin/edit_question/<int:question_id>/', admin_views.edit_question, name='admin_edit_question'),
+    path('customadmin/delete_question/<int:question_id>/', admin_views.delete_question, name='admin_delete_question'),
 
     path('customadmin/all_users/', admin_views.all_users, name='admin_view_all_users'),
     path('customadmin/active_users/', admin_views.active_users, name='admin_view_active_users'),
     path('customadmin/dormant_users/', admin_views.dormant_users, name='admin_view_dormant_users'),
-    path('customadmin/update_user/<str:user_id>', admin_views.update_user,name='admin_update_user'),
-    path('customadmin/delete_user/<str:user_id>/', admin_views.delete_user, name='admin_delete_user'),
+    path('customadmin/update_user/<int:user_id>', admin_views.update_user,name='admin_update_user'),
+    path('customadmin/delete_user/<int:user_id>/', admin_views.delete_user, name='admin_delete_user'),
 
 ]
 if settings.DEBUG:

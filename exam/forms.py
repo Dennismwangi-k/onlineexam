@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
-from exam.models import ExamUser
+from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=144, required=True)
@@ -58,3 +58,60 @@ class AdminSetPasswordForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class ExamForm(forms.ModelForm):
+    class Meta:
+        model = Exam
+        fields = '__all__'
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Courses
+        fields = '__all__'
+
+class AnswerForm(forms.ModelForm):
+    is_correct = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        label='Mark as Correct Answer'
+    )
+
+    class Meta:
+        model = QuestionAnswers
+        fields = ['answer_text', 'is_correct']
+        labels = {
+            'answer_text': 'Answer Text',
+        }
+        widgets = {
+            'answer_text': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class QuestionAnswerFormSet(forms.BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+
+        correct_count = 0
+        for form in self.forms:
+            if form.cleaned_data.get('is_correct'):
+                correct_count += 1
+
+        if correct_count != 1:
+            raise forms.ValidationError('Exactly one answer should be marked as correct.')
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Questions
+        fields = ['question_text','question_type', 'answer_explanation']
+
+QuestionAnswerFormSet = forms.inlineformset_factory(
+    Questions,
+    QuestionAnswers,
+    form=AnswerForm,  # You should create an AnswerForm if not already done
+    formset=QuestionAnswerFormSet,
+    extra=4,  # Number of answer forms
+    min_num=4,
+    validate_min=True,
+    max_num=4,
+    validate_max=True,
+)
