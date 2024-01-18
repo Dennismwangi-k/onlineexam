@@ -28,12 +28,11 @@ class ExamUser(AbstractUser):
 
 
 class Courses(models.Model):
-    user = models.ForeignKey(ExamUser, on_delete=models.CASCADE)
     course_name = models.CharField(max_length=50)
-    course_description = models.CharField(max_length=100)
+    course_description = models.TextField()
 
     def __str__(self):
-        return self.course_id
+        return self.course_name
     
 class Questions(models.Model):
     question_text = models.CharField(max_length=100)
@@ -47,7 +46,7 @@ class Questions(models.Model):
         return self.question_id
     
 class QuestionAnswers(models.Model):
-    question_id = models.ForeignKey(Questions, on_delete=models.CASCADE)
+    question = models.ForeignKey(Questions, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=100)
     is_correct = models.BooleanField(default=False)
 
