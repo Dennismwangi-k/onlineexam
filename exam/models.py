@@ -64,7 +64,7 @@ class Exam(models.Model):
 
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     exam_name = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     duration = models.CharField(max_length=3, choices=DURATION_CHOICES)
 
     def __str__(self):
