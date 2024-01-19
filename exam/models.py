@@ -34,10 +34,16 @@ class Courses(models.Model):
     def __str__(self):
         return self.course_name
     
+    
 class Questions(models.Model):
+    QUESTION_TYPE_CHOICES = [
+        ("Multiple Choice", 'Multiple Choice'),
+        ("Short Answer", 'Short Answer'),
+        ("True/False", 'True/False'),
+    ]
     question_text = models.CharField(max_length=100)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    question_type = models.CharField(max_length=10)
+    question_type = models.CharField(max_length=20, choices=QUESTION_TYPE_CHOICES)
     answer_explanation = models.TextField()
     exam = models.ForeignKey("Exam", on_delete=models.CASCADE , null=True, blank=True)
 

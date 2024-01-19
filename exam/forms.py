@@ -71,7 +71,7 @@ class CourseForm(forms.ModelForm):
 
 class AnswerForm(forms.ModelForm):
     is_correct = forms.BooleanField(
-        required=True,
+        required=False,
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         label='Mark as Correct Answer'
     )

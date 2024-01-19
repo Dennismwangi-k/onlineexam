@@ -32,7 +32,7 @@
                                     <td>{{ exam.exam_name }}</td>
                                     <td>{{ exam.description }}</td>
                                     <td>{{ exam.course.course_name}}</td>
-                                    <td><a href="{% url 'admin_question_list' exam.pk %}" class="text-success">
+                                    <td><a href="{% url 'admin_question_list' exam.pk %}" class="text-success"> {{ exam.question_count }}
                                       Questions</a></td>
                                     <td>{{ exam.duration}} minutes</td>
                                     <td><a href="{% url 'admin_edit_exam' exam.pk %}" class="btn btn-warning">

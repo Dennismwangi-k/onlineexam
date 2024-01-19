@@ -45,7 +45,7 @@ def login(request):
       user = authenticate(username=username, password=password)
       if user is not None:
         auth_login(request, user)
-        if user.groups.filter(name="Admin").exists():
+        if request.user.is_superuser:
             return redirect('admin_dashboard')
         else:
             return redirect('exam')
