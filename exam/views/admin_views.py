@@ -11,6 +11,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.views import PasswordChangeView
 from exam.decorators import admin_only
+from django.http import JsonResponse
+
 
 @login_required
 @admin_only
@@ -262,3 +264,20 @@ def delete_question(request, question_id):
         return redirect('admin_dashboard')
     context = {'question': question}
     return render(request, 'customadmin/delete_question.html', context)
+
+
+def check_answer(request, answer_id):
+    try:
+        selected_answer = QuestionAnswers.objects.get(pk=answer_id)
+        is_correct = selected_answer.is_correct
+        explanation = selected_answer.question.answer_explanation
+    except QuestionAnswers.DoesNotExist:
+        is_correct = False
+        explanation = "Invalid answer selected."
+
+    result = {
+        'result': 'Correct' if is_correct else 'Incorrect',
+        'explanation': explanation,
+    }
+
+    return JsonResponse(result)

@@ -38,7 +38,8 @@ urlpatterns = [
     path('contact', app_views.contact, name='contact'),
     path('services', app_views.services, name='services'),
     path('blog', app_views.blog, name='blog'),
-    path('test', app_views.test, name='test'),
+    path('test/<int:exam_id>/', app_views.test, name='test'),
+    path('check_answer/<int:answer_id>/', admin_views.check_answer, name='check_answer'),
 
     ##Admin Views
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
