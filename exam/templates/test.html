@@ -21,39 +21,36 @@
           <div class="col-md-2"></div>
           <div class="col-md-8">
             <!-- general form elements -->
-            <div class="">
-              <div class="container mt-sm-5 my-1">
-                <form id="quiz-form" method="post" action="">
-                  {% csrf_token %}
-                  {% for question in questions %}
-                    <div class="question ml-sm-5 pl-sm-5 pt-2" id="question{{ forloop.counter }}" {% if forloop.counter != 1 %} style="display: none;"{% endif %}>
-                      <div class="py-2 h5"><b>Q{{ forloop.counter }}. {{ question.question_text }}</b></div>
-                      <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options{{ forloop.counter }}">
-                        {% for answer in question.questionanswers_set.all %}
-                          <label class="options d-block">
-                            {{ answer.answer_text }}
-                            <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
-                            <span class="checkmark"></span>
-                          </label>
-                        {% endfor %}
-                      </div>
-                      <div id="result{{ forloop.counter }}" class="pt-3"></div>
-                      <button type="button" class="btn btn-info" onclick="checkAnswer('{{ question.id }}', '{{ forloop.counter }}')">Check Answer</button>
+            <div class="container mt-sm-5 my-1 p-4 bg-light text-dark rounded">
+              <form id="quiz-form" method="post" action="">
+                {% csrf_token %}
+                {% for question in questions %}
+                  <div class="question mt-4" id="question{{ forloop.counter }}" {% if forloop.counter != 1 %} style="display: none;"{% endif %}>
+                    <div class="h5 font-weight-bold">Q{{ forloop.counter }}. {{ question.question_text }}</div>
+                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options{{ forloop.counter }}">
+                      {% for answer in question.questionanswers_set.all %}
+                        <label class="options d-block">
+                          {{ answer.answer_text }}
+                          <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                          <span class="checkmark"></span>
+                        </label>
+                      {% endfor %}
                     </div>
-                  {% endfor %}
-                  <div class="d-flex align-items-center pt-3">
-                    <div id="prev">
-                      {% if questions|length > 1 %}
-                        <button type="button" class="btn btn-secondary" onclick="showQuestion('prev')">Previous</button>
-                      {% endif %}
-                    </div>
-                    <div class="ml-auto mr-sm-5">
-                      <button type="button" class="btn btn-primary" onclick="showQuestion('next')">Next</button>
-                      <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">Submit</button>
-                    </div>
+                    <div id="result{{ forloop.counter }}" class="pt-3"></div>
+                    <button type="button" class="btn btn-success" onclick="checkAnswer('{{ question.id }}', '{{ forloop.counter }}')">Check Answer</button>
                   </div>
-                </form>
-              </div>
+                {% endfor %}
+                <div class="d-flex align-items-center pt-3">
+                  <div id="prev">
+                    {% if questions|length > 1 %}
+                      <button type="button" class="btn btn-secondary" onclick="showQuestion('prev')">Previous</button>
+                    {% endif %}
+                  </div>
+                  <div class="ml-auto mr-sm-5">
+                    <button type="button" class="btn btn-primary" onclick="showQuestion('next')">Next</button>
+                  </div>
+                </div>
+              </form>
             </div>
             <!-- /.card -->
           </div>

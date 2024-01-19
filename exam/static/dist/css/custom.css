@@ -121,17 +121,13 @@ body{
     transition: 300ms ease-in-out 0s;
 }
 .options input[type="radio"]:checked ~ .checkmark{
-    background: #21bf73;
+    background: #007bff;
     transition: 300ms ease-in-out 0s;
 }
 .options input[type="radio"]:checked ~ .checkmark:after{
     transform: translate(-50%,-50%) scale(1);
 }
 
-.btn-primary:hover, .btn-secondary:hover{
-    background-color: #21bf73;
-    border: 1px solid #21bf73;
-}
 
 @media(max-width:576px){
     .question{
