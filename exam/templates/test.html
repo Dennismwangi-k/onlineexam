@@ -18,16 +18,27 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <!-- Question list on the left -->
+            <div class="list-group">
+              {% for question in questions %}
+                <a href="#" class="list-group-item list-group-item-action" onclick="showQuestionFromList('{{ question.id }}')">
+                  Q{{ forloop.counter }}. {{ question.question_text }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- middle to right column -->
           <div class="col-md-8">
             <!-- general form elements -->
-            <div class="container mt-sm-5 my-1 p-4 bg-light text-dark rounded">
+            <div class="bg-light text-dark rounded">
               <form id="quiz-form" method="post" action="">
                 {% csrf_token %}
                 {% for question in questions %}
-                  <div class="question mt-4" id="question{{ forloop.counter }}" {% if forloop.counter != 1 %} style="display: none;"{% endif %}>
+                  <div class="question" id="question{{ question.id }}" {% if forloop.counter != 1 %} style="display: none;"{% endif %}>
                     <div class="h5 font-weight-bold">Q{{ forloop.counter }}. {{ question.question_text }}</div>
-                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options{{ forloop.counter }}">
+                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options{{ question.id }}">
                       {% for answer in question.questionanswers_set.all %}
                         <label class="options d-block">
                           {{ answer.answer_text }}
@@ -36,8 +47,8 @@
                         </label>
                       {% endfor %}
                     </div>
-                    <div id="result{{ forloop.counter }}" class="pt-3"></div>
-                    <button type="button" class="btn btn-success" onclick="checkAnswer('{{ question.id }}', '{{ forloop.counter }}')">Check Answer</button>
+                    <div id="result{{ question.id }}" class="pt-3"></div>
+                    <button type="button" class="btn btn-success" onclick="checkAnswer('{{ question.id }}', '{{ question.id }}')">Check Answer</button>
                   </div>
                 {% endfor %}
                 <div class="d-flex align-items-center pt-3">
@@ -54,7 +65,6 @@
             </div>
             <!-- /.card -->
           </div>
-          <div class="col-md-2"></div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -76,6 +86,38 @@
       document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
       // Show the current question
       document.getElementById(`question${currentQuestion}`).style.display = 'block';
+
+      // Highlight the selected question in the left column
+      document.querySelectorAll('.list-group-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      document.getElementById(`questionLink${currentQuestion}`).classList.add('active');
+
+      // Show/hide next and previous buttons
+      document.getElementById('prev').style.display = currentQuestion === 1 ? 'none' : 'block';
+      document.getElementById('submit-btn').style.display = currentQuestion === {{ questions|length }} ? 'block' : 'none';
+
+      // Change button label to "Submit" on the last question
+      document.getElementById('submit-btn').innerText = currentQuestion === {{ questions|length }} ? 'Submit' : 'Next';
+
+      // Scroll to the top of the page to avoid scrolling to an empty area
+      window.scrollTo(0, 0);
+    }
+
+    function showQuestionFromList(questionId) {
+      // Hide all questions
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      // Show the clicked question
+      document.getElementById(`question${questionId}`).style.display = 'block';
+
+      // Update the currentQuestion variable
+      currentQuestion = parseInt(questionId);
+
+      // Highlight the selected question in the left column
+      document.querySelectorAll('.list-group-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      document.getElementById(`questionLink${currentQuestion}`).classList.add('active');
 
       // Show/hide next and previous buttons
       document.getElementById('prev').style.display = currentQuestion === 1 ? 'none' : 'block';
@@ -106,6 +148,8 @@
         alert('Please select an answer before checking.');
       }
     }
-  </script>
+</script>
+
+
 
 {% endblock %}
