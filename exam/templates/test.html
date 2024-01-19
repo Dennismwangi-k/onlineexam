@@ -18,66 +18,46 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
             <!-- general form elements -->
-            <div class="card card-primary">
-              <div id="quiz-container" style="position: relative;">
-                <h1 id="course_name" class="card-header">Quiz</h1>
-                <div class="card-body">
-                  <div class="top-buttons">
-                    <button class="btn btn-secondary round-button" type="button" id="prev-button">
-                      <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button class="btn btn-secondary round-button" type="button" id="next-button">
-                      <i class="fas fa-arrow-right"></i>
-                    </button>
-                  </div>
-                  <div class="question-numbers">
-                    <!-- Question numbers inject-->
-                  </div>
-                  <div class="colors">
-                    Current
-                    <div class="current"></div>
-                    Correct
-                    <div class="correct"></div>
-                    Incorrect
-                    <div class="incorrect"></div>
-                    Skipped
-                    <div class="skipped"></div>
-                  </div>
-                  <div class="question-holder">
-                    <div class="question-stats">
-                      QUESTION <span class="current-question-stat">1</span> OF <span class="total-questions-stat">3</span>
-                    </div>
-                    <center>
-                      <div id="question-container">
-                        <!-- Question inject-->
+            <div class="">
+              <div class="container mt-sm-5 my-1">
+                <form id="quiz-form" method="post" action="">
+                  {% csrf_token %}
+                  {% for question in questions %}
+                    <div class="question ml-sm-5 pl-sm-5 pt-2" id="question{{ forloop.counter }}" {% if forloop.counter != 1 %} style="display: none;"{% endif %}>
+                      <div class="py-2 h5"><b>Q{{ forloop.counter }}. {{ question.question_text }}</b></div>
+                      <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options{{ forloop.counter }}">
+                        {% for answer in question.questionanswers_set.all %}
+                          <label class="options d-block">
+                            {{ answer.answer_text }}
+                            <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                            <span class="checkmark"></span>
+                          </label>
+                        {% endfor %}
                       </div>
-                    </center>
+                      <div id="result{{ forloop.counter }}" class="pt-3"></div>
+                      <button type="button" class="btn btn-info" onclick="checkAnswer('{{ question.id }}', '{{ forloop.counter }}')">Check Answer</button>
+                    </div>
+                  {% endfor %}
+                  <div class="d-flex align-items-center pt-3">
+                    <div id="prev">
+                      {% if questions|length > 1 %}
+                        <button type="button" class="btn btn-secondary" onclick="showQuestion('prev')">Previous</button>
+                      {% endif %}
+                    </div>
+                    <div class="ml-auto mr-sm-5">
+                      <button type="button" class="btn btn-primary" onclick="showQuestion('next')">Next</button>
+                      <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">Submit</button>
+                    </div>
                   </div>
-                  <form id="answers-container" class="mt-3">
-                    <!-- Options inject-->
-                  </form>
-                  <div class="bottom-buttons mt-3">
-                    <button class="btn btn-primary next-button2" type="button" id="next-button2">
-                      Next
-                      <i class="fas fa-arrow-right"></i>
-                    </button>
-                    <button class="btn btn-success submit-button" type="button" id="submit-button">
-                      Check
-                      <i class="fas fa-check"></i>
-                    </button>
-                  </div>
-                  <div class="alert-box mt-3">
-                    <!-- Alert box inject-->
-                  </div>
-                </div>
+                </form>
               </div>
             </div>
             <!-- /.card -->
           </div>
-          <div class="col-md-3"></div>
+          <div class="col-md-2"></div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -86,233 +66,49 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    let currentQuestion = 1;
 
-        //TODO! fetch questions from database
-        const questions = [
-            {
-                question: 'What is the capital of France?',
-                options: ['Paris', 'London', 'Berlin', 'Madrid'],
-                answer: 'Paris'
-            },
-            {
-                question: 'Who painted the Mona Lisa?',
-                options: ['Vincent Van Gogh', 'Pablo Picasso', 'Leonardo da Vinci', 'Michelangelo'],
-                answer: 'Leonardo da Vinci'
-            },
-            {
-                question: 'What is the largest planet in our solar system?',
-                options: ['Earth', 'Jupiter', 'Saturn', 'Mars'],
-                answer: 'Jupiter'
-            },
-        ];
+    function showQuestion(direction) {
+      if (direction === 'next' && currentQuestion < {{ questions|length }}) {
+        currentQuestion += 1;
+      } else if (direction === 'prev' && currentQuestion > 1) {
+        currentQuestion -= 1;
+      }
 
-        let currentQuestionIndex = 0;
-        let CorrectAnswers = 0;
+      // Hide all questions
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      // Show the current question
+      document.getElementById(`question${currentQuestion}`).style.display = 'block';
 
-        //map for question and answers
-        let questionMap = new Map();
+      // Show/hide next and previous buttons
+      document.getElementById('prev').style.display = currentQuestion === 1 ? 'none' : 'block';
+      document.getElementById('submit-btn').style.display = currentQuestion === {{ questions|length }} ? 'block' : 'none';
 
+      // Change button label to "Submit" on the last question
+      document.getElementById('submit-btn').innerText = currentQuestion === {{ questions|length }} ? 'Submit' : 'Next';
 
-        //display question numbers
-        const questionNumbers = document.querySelector('.question-numbers');
-        questions.forEach((question, index) => {
-            const questionNumber = document.createElement('div');
-            questionNumber.className = 'question-number';
-            questionNumber.textContent = index + 1;
-            questionNumbers.appendChild(questionNumber);
-        });
+      // Scroll to the top of the page to avoid scrolling to an empty area
+      window.scrollTo(0, 0);
+    }
 
-        const questionContainer = document.getElementById('question-container');
-        const answersContainer = document.getElementById('answers-container');
-        const submitButton = document.getElementById('submit-button');
+    function checkAnswer(questionId, questionNumber) {
+      const selectedAnswer = document.querySelector(`input[name="question_${questionId}"]:checked`);
+      if (selectedAnswer) {
+        const answerId = selectedAnswer.value;
+        // Assuming you have a view or API endpoint to check the answer
+        // You can send an AJAX request to your backend to check the answer
+        // and get the result along with the explanation
+        const apiUrl = `/check_answer/${answerId}/`; // Update with your actual API endpoint
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            const resultContainer = document.getElementById(`result${questionNumber}`);
+            resultContainer.innerHTML = `<p>${data.result}</p><p>${data.explanation}</p>`;
+          });
+      } else {
+        alert('Please select an answer before checking.');
+      }
+    }
+  </script>
 
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-        const nextButton2 = document.getElementById('next-button2');
-
-        //url ...course.html?name=course2
-        let url = window.location.search;
-        let course_param = url.split('=')[1];
-        let course_name = document.getElementById('course_name');
-        course_name.innerHTML = "Quiz for " + course_param;
-
-
-        nextButton2.addEventListener('click', () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
-            }
-        });
-
-        prevButton.addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                showQuestion(currentQuestionIndex);
-            }
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
-            }
-        });
-
-        function showQuestion(index) {
-            const questionObj = questions[index];
-            questionContainer.textContent = questionObj.question;
-            answersContainer.innerHTML = '';
-
-            questionObj.options.forEach((option, i) => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'answer-option';
-
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'option';
-                radio.value = option;
-                radio.id = 'option' + i;
-
-                const label = document.createElement('label');
-                label.htmlFor = 'option' + i;
-                label.textContent = option;
-
-                wrapper.appendChild(radio);
-                wrapper.appendChild(label);
-
-                answersContainer.appendChild(wrapper);
-            });
-
-            //if it is the last question
-            if (currentQuestionIndex === questions.length - 1) {
-
-                //disable next button
-                nextButton2.disabled = true;
-                nextButton.disabled = true;
-
-                //change submit button text to finish
-                submitButton.innerHTML = "Finish";
-            } else {
-                nextButton2.disabled = false;
-                nextButton.disabled = false;
-                submitButton.innerHTML = "Check";
-            }
-
-            //if it is the first question
-            if (currentQuestionIndex === 0) {
-                prevButton.style.display = "none";
-            } else {
-                prevButton.style.display = "block";
-            }
-
-
-            let questionNumStats = document.getElementsByClassName('current-question-stat');
-            questionNumStats[0].innerHTML = currentQuestionIndex + 1;
-
-            let totalQuestionsStats = document.getElementsByClassName('total-questions-stat');
-            totalQuestionsStats[0].innerHTML = questions.length;
-
-            //remove current class from all other questions
-            let questionNumbers = document.getElementsByClassName('question-number');
-            for (let i = 0; i < questionNumbers.length; i++) {
-                if (i !== currentQuestionIndex) {
-                    questionNumbers[i].classList.remove('current');
-                }
-            }
-
-            let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
-            questionNumber.classList.add('current');
-
-            // Enable the submit button for the new question
-            if (questionMap.get(questionObj.question) == null) {
-                submitButton.disabled = false;
-            } else {
-                submitButton.disabled = true;
-                showCustomAlert("You have already answered this question", "error");
-            }
-        }
-
-        function selectAnswer() {
-            const selectedOption = answersContainer.querySelector('input[name="option"]:checked');
-            if (selectedOption) {
-                let question = questions[currentQuestionIndex];
-                let isCorrect = question.answer === selectedOption.value;
-                showCustomAlert(isCorrect ? "Correct" : "Incorrect", isCorrect ? "success" : "error");
-                if (isCorrect) {
-                    CorrectAnswers++;
-                    let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
-                    questionNumber.classList.add('correct');
-                } else {
-                    let questionNumber = document.getElementsByClassName('question-number')[currentQuestionIndex];
-                    questionNumber.classList.add('incorrect');
-                }
-
-                const allOptions = answersContainer.querySelectorAll('.answer-option');
-                allOptions.forEach(option => {
-                    const radio = option.querySelector('input');
-                    if (radio.value === question.answer) {
-                        option.style.backgroundColor = '#d4edda';
-                    } else if (radio === selectedOption) {
-                        option.style.backgroundColor = 'rgba(241,59,75,0.74)';
-                    }
-                });
-            } else {
-                showCustomAlert("Please select an answer", "error");
-                return;
-            }
-
-            submitButton.disabled = true;
-            let question = questions[currentQuestionIndex];
-            let answer = question.answer === selectedOption.value ? "Correct" : "Incorrect";
-            console.log(question.question + " " + selectedOption.value + " " + answer);
-            questionMap.set(questions[currentQuestionIndex].question, [selectedOption.value, answer]);
-
-            setTimeout(() => {
-                // If this is the last question, show the results
-                if (currentQuestionIndex === questions.length - 1) {
-                    //check if all questions are answered
-                    if (questionMap.size !== questions.length) {
-                        showCustomAlert("Please answer all questions", "error");
-                        //enable submit button
-                        submitButton.disabled = false;
-                        return;
-                    }
-
-                    // Last question
-                    showCustomAlert("Your score is " + CorrectAnswers + "/" + questions.length, "success");
-                    //send score to database
-                    //TODO! get user id from session
-                    let user_id = 1;
-                    let course_name = window.location.search.split('=')[1];
-                    let data = {
-                        user_id: user_id,
-                        course_name: course_name,
-                        score: CorrectAnswers
-                    };
-
-                    //TODO! send data to backend
-                }
-            }, 1500); // Delay after selecting an answer
-        }
-
-        function showCustomAlert(msg, type) {
-            const alertBoxContainer = document.querySelector('.alert-box');
-            const alertBox = alertBoxContainer ? alertBoxContainer : document.createElement('div');
-            alertBox.className = 'alert-box';
-            alertBox.classList.add(type);
-            let iconText = type === "success" ? "<i class='fas fa-check-circle'></i>" : "<i class='fas fa-times-circle'></i>";
-
-            alertBox.innerHTML = iconText + " " + msg;
-            document.body.appendChild(alertBox);
-            setTimeout(() => {
-                alertBox.remove();
-            }, 2000);
-        }
-
-        submitButton.addEventListener('click', selectAnswer);
-
-        showQuestion(currentQuestionIndex);
-    });
-</script>
-  {% endblock %}
+{% endblock %}
