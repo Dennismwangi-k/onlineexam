@@ -30,15 +30,9 @@
             </div>
           </form>
         </div>
-        
-            {% url 'admin_dashboard' as admin_dashboard_url %}
-            {% url 'exam' as exam_url %}
+      
 
-            {% if request.user.is_superuser and request.path != admin_dashboard_url %}
-            <li class="nav-item">
-            <a class="nav-link" href="{{ admin_dashboard_url }}">Admin Dashboard</a>
-            </li>
-            {% elif request.path == exam_url %}
+            {% if request.user.is_superuser %}
             <li class="nav-item">
             <a class="nav-link" href="{{ admin_dashboard_url }}">Admin Dashboard</a>
             </li>
@@ -47,9 +41,6 @@
             <a class="nav-link" href="{{ exam_url }}">Exam</a>
             </li>
             {% endif %}
-
-        
-
       </li>
     </ul>
   </nav>

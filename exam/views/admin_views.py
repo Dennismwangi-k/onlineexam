@@ -11,11 +11,15 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.views import PasswordChangeView
 from exam.decorators import admin_only
+from django.http import JsonResponse
+
 
 @login_required
 @admin_only
 def admin_dashboard(request):
     total_users_count = ExamUser.objects.all().count()
+    total_exam_count = Exam.objects.all().count()
+    total_courses_count = Courses.objects.all().count()
     active_users_count = ExamUser.objects.all().filter(is_active=True).count()
     dormant_users_count = ExamUser.objects.all().filter(is_active=False).count()
 
@@ -23,6 +27,8 @@ def admin_dashboard(request):
         'total_users_count': total_users_count,
         'active_users_count': active_users_count,
         'dormant_users_count': dormant_users_count,
+        'total_exam_count': total_exam_count,
+        'total_courses_count': total_courses_count,
 
     }
 
@@ -150,7 +156,13 @@ def delete_course(request, course_id):
 @admin_only
 def exam_list(request):
     exams = Exam.objects.all()
+
+    # Add a count field to each exam instance
+    for exam in exams:
+        exam.question_count = exam.questions_set.count()
+
     return render(request, 'customadmin/exam_list.html', {'exams': exams})
+
 
 @login_required
 @admin_only
@@ -193,9 +205,12 @@ def delete_exam(request, exam_id):
 
 @login_required
 @admin_only
-def question_list(request,exam_id):
+def question_list(request, exam_id):
+    exam = get_object_or_404(Exam, pk=exam_id)
     questions = Questions.objects.filter(exam_id=exam_id)
-    return render(request, 'customadmin/question_list.html', {'questions': questions,"exam_id":exam_id})
+
+    return render(request, 'customadmin/question_list.html', {'questions': questions, 'exam': exam, 'exam_id': exam_id})
+
 
 @login_required
 @admin_only
@@ -216,7 +231,7 @@ def add_question(request, exam_id):
             for answer in answers:
                 answer.question = question
                 answer.save()
-
+            messages.success(request, f'Question Added Successfully!')
             return redirect('admin_question_list', exam_id=exam_id)
     else:
         form = QuestionForm()
@@ -241,7 +256,7 @@ def edit_question(request, question_id):
             for answer in answers:
                 answer.question = question
                 answer.save()
-
+            messages.success(request, f'Question Updated Successfully!')          
             return redirect('admin_question_list', exam_id=question.exam.id)
     else:
         form = QuestionForm(instance=question)
@@ -254,11 +269,27 @@ def edit_question(request, question_id):
 
 
 @login_required
-@admin_only
+# @admin_only
 def delete_question(request, question_id):
     question = get_object_or_404(Questions, pk=question_id)
     if question:
         question.delete()
-        return redirect('admin_dashboard')
-    context = {'question': question}
-    return render(request, 'customadmin/delete_question.html', context)
+        messages.success(request, f'Question Deleted Successfully!') 
+        return redirect('admin_question_list', exam_id=question.exam.id)
+
+
+def check_answer(request, answer_id):
+    try:
+        selected_answer = QuestionAnswers.objects.get(pk=answer_id)
+        is_correct = selected_answer.is_correct
+        explanation = selected_answer.question.answer_explanation
+    except QuestionAnswers.DoesNotExist:
+        is_correct = False
+        explanation = "Invalid answer selected."
+
+    result = {
+        'result': 'Correct' if is_correct else 'Incorrect',
+        'explanation': explanation,
+    }
+
+    return JsonResponse(result)

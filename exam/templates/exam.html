@@ -3,73 +3,56 @@
 {% block content %}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1>Get Started in Simple Steps</h1>
-              </div>
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="font-weight-bold">Get Started in Simple Steps</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-6">
-              <!-- general form elements -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">You're just a few steps away from getting started with your test.</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="card course-card" onclick="openCourse('course1')">
-                      <div class="card-body">
-                        <h5 class="card-title">Test Course 1</h5>
-                        <p class="card-text">Description of Test for Course 1</p>
-                        <div class="course-metadata">
-                          <a href="{% url 'test' %}" class="btn btn-primary">Start Test</a>
-                          <div class="questions-count">
-                            <span class="number">10</span> Questions
-                          </div>
-                          <div class="course-duration">
-                            <i class="far fa-clock"></i> 1 hr
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              
-                  <div class="col-md-6">
-                    <div class="card course-card" onclick="openCourse('course2')">
-                      <div class="card-body">
-                        <h5 class="card-title">Test Course 2</h5>
-                        <p class="card-text">Description of Test for Course 2</p>
-                        <div class="course-metadata">
-                          <a href="{% url 'test' %}" class="btn btn-primary">Start Test</a>
-                          <div class="questions-count">
-                            <span class="number">7</span> Questions
-                          </div>
-                          <div class="course-duration">
-                            <i class="far fa-clock"></i> 20 min
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title font-weight-bold">You're just a few steps away from getting started with your test.</h3>
               </div>
-              <!-- /.card -->
+              <!-- /.card-header -->
+              <div class="row">
+                {% for exam in exams %}
+                  <div class="col-md-6 mt-3">
+                    <div class="card course-card" onclick="openCourse('{{ exam.exam_name }}')">
+                      <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ exam.exam_name }}</h5>
+                        <p class="card-text">{{ exam.description }}</p>
+                        <div class="course-metadata">
+                          <a href="{% url 'test' exam.id %}" class="btn btn-primary">Start Test</a>
+                          <div class="questions-count">
+                            <span class="number">{{ exam.questions_set.count }}</span> Questions
+                          </div>
+                          <div class="course-duration">
+                            <i class="far fa-clock"></i> {{ exam.duration }} min
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
+            <!-- /.card -->
           </div>
-        </div><!-- /.container-fluid -->
-      </section>
-      
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
     <!-- /.content -->
   </div>
-  {% endblock %}
+{% endblock %}

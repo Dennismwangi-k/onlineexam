@@ -65,7 +65,35 @@
         </div>
         <!-- ./col -->
       </div>
-
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-secondary">
+            <div class="inner">
+              <h1>{{total_courses_count}}</h1>
+              <p>Courses</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-book"></i>
+            </div>
+            <a href="{% url 'admin_course_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h1>{{total_exam_count}}</h1>
+              <p>Exams</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-bookmarks"></i>
+            </div>
+            <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
     </div><!-- /.container-fluid -->
   </section>
 
