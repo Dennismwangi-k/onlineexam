@@ -39,9 +39,14 @@
 
 
   {% include 'navbar.html' %}
-
+  <style>
+    p{
+      color: black;
+    }
+  </style>
+ 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: aliceblue; color: black;">
     <!-- Brand Logo -->
     <a href="{% url 'admin_dashboard' %}" class="brand-link">
   <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
@@ -66,57 +71,22 @@
 
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <nav class="mt-2" >
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" >
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{% url 'admin_dashboard' %}" class="nav-link active">
+          <li class="nav-item" >
+            <a href="{% url 'admin_dashboard' %}" class="nav-link active" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Overview
               </p>
             </a>
           </li>
+         
+          
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
-              <p>
-                Manage Users
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{% url 'admin_view_all_users' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'admin_view_active_users' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'admin_view_dormant_users' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dormant Users</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-book"></i>
-              <p>
-                Courses
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
+            
                 <a href="{% url 'admin_course_list' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Courses</p>
@@ -128,18 +98,11 @@
                   <p>Add Course</p>
                 </a>
               </li>
-            </ul>
+           
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-book"></i>
-              <p>
-                Exam
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
+            
+             
                 <a href="{% url 'admin_exam_list' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Exams</p>
@@ -151,9 +114,29 @@
                   <p>Add Exam</p>
                 </a>
               </li>
-            </ul>
-          </li>
+          
+      
 
+          
+          <li class="nav-item">
+            
+            <a href="{% url 'admin_view_all_users' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>All Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'admin_view_active_users' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Active Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'admin_view_dormant_users' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Dormant Users</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{% url 'profile' %}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
@@ -162,7 +145,6 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Other Services</li>
           <li class="nav-item">
             <a href="{% url 'logout' %}" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
