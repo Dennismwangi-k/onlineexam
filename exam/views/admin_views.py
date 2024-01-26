@@ -1,17 +1,19 @@
 # customadmin/views.py
-from django.shortcuts import render, redirect, get_object_or_404
-from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
-
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from exam.forms import AdminProfileUpdateForm, AdminSetPasswordForm, AnswerForm, CourseForm, ExamForm,ProfileUpdateForm, QuestionAnswerFormSet, QuestionForm
-from django.db.models import Sum, IntegerField
-from django.db.models.functions import Round
-from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import PasswordChangeView
-from exam.decorators import admin_only
+from django.db.models import IntegerField, Sum
+from django.db.models.functions import Round
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+
+from exam.decorators import admin_only
+from exam.forms import (AdminProfileUpdateForm, AdminSetPasswordForm,
+                        AnswerForm, CourseForm, ExamForm, ProfileUpdateForm,
+                        QuestionAnswerFormSet, QuestionForm)
+from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
 
 
 @login_required

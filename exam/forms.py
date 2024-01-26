@@ -1,7 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
+
 from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
+
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=144, required=True)

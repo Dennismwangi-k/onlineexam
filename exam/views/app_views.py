@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from exam.models import Exam, Questions
 
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
