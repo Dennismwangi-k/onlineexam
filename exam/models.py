@@ -1,6 +1,7 @@
-from django.db import models
-from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxLengthValidator, MinLengthValidator
+from django.db import models
+
 '''import abstractuser'''
 
 
