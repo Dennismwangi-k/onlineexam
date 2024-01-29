@@ -45,27 +45,9 @@ def all_users(request):
     }
     return render(request, 'customadmin/users.html', context)
 
-@login_required
-@admin_only
-def active_users(request):
-    users = ExamUser.objects.filter(is_active=True).all()
 
-    context = {
-        'users': users,
-        'table_title': "Active Users"
-    }
-    return render(request, 'customadmin/users.html', context)
 
-@login_required
-@admin_only
-def dormant_users(request):
-    users = ExamUser.objects.filter(is_active=False).all()
 
-    context = {
-        'users': users,
-        'table_title': "Dormant Users"
-    }
-    return render(request, 'customadmin/users.html', context)
 
 
 @login_required
@@ -154,28 +136,17 @@ def exam_list(request):
     exams = Exam.objects.all()
 
     # Add a count field to each exam instance
-   
-
-   
-
-    for exam in exams:
-        exam.question_count = exam.questions_set.count()
-
-    return render(request, 'customadmin/exam_list.html', {'exams': exam})
-
-
-@login_required
-@admin_only
-def add_exam(request):
     if request.method == 'POST':
-        form = ExamForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Exam Created Successfully!')
-            return redirect('admin_exam_list')
+            form = ExamForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, f'Exam Created Successfully!')
+                return redirect('admin_exam_list')
     else:
-        form = ExamForm()
-    return render(request, 'customadmin/add_exam.html', {'form': form})
+            form = ExamForm()
+
+    return render(request, 'customadmin/exam_list.html', {'exams': exams, 'form': form})
+
 
 @login_required
 @admin_only

@@ -50,7 +50,7 @@ urlpatterns = [
     path('customadmin/delete_course/<int:course_id>/', admin_views.delete_course, name='admin_delete_course'),
 
     path('customadmin/exam_list/', admin_views.exam_list, name='admin_exam_list'),
-    path('customadmin/add_exam/', admin_views.add_exam, name='admin_add_exam'),
+
     path('customadmin/edit_exam/<int:exam_id>/', admin_views.edit_exam, name='admin_edit_exam'),
     path('customadmin/delete_exam/<int:exam_id>/', admin_views.delete_exam, name='admin_delete_exam'),
 
@@ -60,8 +60,7 @@ urlpatterns = [
     path('customadmin/delete_question/<int:question_id>/', admin_views.delete_question, name='admin_delete_question'),
 
     path('customadmin/all_users/', admin_views.all_users, name='admin_view_all_users'),
-    path('customadmin/active_users/', admin_views.active_users, name='admin_view_active_users'),
-    path('customadmin/dormant_users/', admin_views.dormant_users, name='admin_view_dormant_users'),
+  
     path('customadmin/update_user/<int:user_id>', admin_views.update_user,name='admin_update_user'),
     path('customadmin/delete_user/<int:user_id>/', admin_views.delete_user, name='admin_delete_user'),
 
