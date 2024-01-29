@@ -45,7 +45,7 @@ urlpatterns = [
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
 
     path('customadmin/course_list/', admin_views.course_list, name='admin_course_list'),
-    path('customadmin/add_course/', admin_views.add_course, name='admin_add_course'),
+
     path('customadmin/edit_course/<int:course_id>/', admin_views.edit_course, name='admin_edit_course'),
     path('customadmin/delete_course/<int:course_id>/', admin_views.delete_course, name='admin_delete_course'),
 

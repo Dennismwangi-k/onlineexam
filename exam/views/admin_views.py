@@ -111,11 +111,6 @@ def update_user(request, user_id):
 @admin_only
 def course_list(request):
     courses = Courses.objects.all()
-    return render(request, 'customadmin/course_list.html', {'courses': courses})
-
-@login_required
-@admin_only
-def add_course(request):
     if request.method == 'POST':
         form = CourseForm(request.POST)
         if form.is_valid():
@@ -124,7 +119,8 @@ def add_course(request):
             return redirect('admin_course_list')
     else:
         form = CourseForm()
-    return render(request, 'customadmin/add_course.html', {'form': form})
+    return render(request, 'customadmin/course_list.html', {'courses': courses,'form': form})
+
 
 @login_required
 @admin_only
@@ -158,10 +154,14 @@ def exam_list(request):
     exams = Exam.objects.all()
 
     # Add a count field to each exam instance
+   
+
+   
+
     for exam in exams:
         exam.question_count = exam.questions_set.count()
 
-    return render(request, 'customadmin/exam_list.html', {'exams': exams})
+    return render(request, 'customadmin/exam_list.html', {'exams': exam})
 
 
 @login_required

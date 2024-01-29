@@ -1,78 +1,131 @@
 {% extends "customadmin/base.html" %}
 {% load custom_filters %}
-{% block content %}
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Available Courses</h3>
-                </div>
-                <!-- /.card-header -->
+{% load bootstrap4 %}
 
-                <div class="card-body">
-                    {% if courses %}
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for course in courses %}
-                                <tr>
-                                    <td>{{ course.course_name }}</td>
-                                    <td>{{ course.course_description }}</td>
-                                    <td><a href="{% url 'admin_edit_course' course.pk %}" class="btn btn-warning">
-                                        Update</a></td>
-                                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-course-{{course.id}}">Delete
-                                    </button></td>               
-                                </tr>
-                                <div class="modal fade" id="delete-course-{{course.id}}">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Delete course  {{course.course_name}}</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
+{% block content %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+              
+            <section class="content" style="margin-right: 0; width:20%; margin-left: 90%;">
+              <div class="container-fluid">
+                  <div class="row"  >
+                      <div class="col-md-6" style=" margin-top: 5%;">
+                          <div class="card card-primary">
+                              
+                              <button type="button" class="btn btn-primary" data-toggle="modal"
+                                      data-target="#addCourseModal">
+                                  Add New Course
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Available Courses</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if courses %}
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for course in courses %}
+                                        <tr>
+                                            <td>{{ course.course_name }}</td>
+                                            <td>{{ course.course_description }}</td>
+                                            <td>
+                                                <a href="{% url 'admin_edit_course' course.pk %}" class="btn btn-warning">
+                                                    Update
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#delete-course-{{course.id}}">
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" id="delete-course-{{course.id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Delete course  {{course.course_name}}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this course?</p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button type="button" class="btn btn-info"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <a href="{% url 'admin_delete_course' course.pk %}">
+                                                            <button type="submit" class="btn btn-danger">Delete
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                          <p>Are you sure you want to delete this course?</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                          <a href="{% url 'admin_delete_course' course.pk %}"><button type="submit" class="btn btn-danger">Delete</button></a>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                  </div>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                  <th>Name</th>
-                                  <th>Description</th>
-                                  <th>Edit</th>
-                                  <th>Delete</th>   
-                                </tr>
-                            </tfoot>
-                        </table>
-                    {% else %}
-                        <p>No course records available.</p>
-                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        {% else %}
+                            <p>No course records available.</p>
+                        {% endif %}
+                    </div>
                 </div>
-                <!-- /.card-body -->
             </div>
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-</div>
+        </section>
+
+     
+       
+
+       
+    </div>
+
+ 
+    <div class="modal fade" id="addCourseModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Course</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
