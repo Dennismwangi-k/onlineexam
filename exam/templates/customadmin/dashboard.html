@@ -35,32 +35,19 @@
             <a href="{% url 'admin_view_all_users' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
+     
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h1>{{active_users_count}}</h1>
-              <p>Active Users</p>
+              <h1>{{total_exam_count}}</h1>
+              <p>Exams</p>
             </div>
             <div class="icon">
-              <i class="ion ion-ios-personadd"></i>
+              <i class="ion ion-ios-bookmarks"></i>
             </div>
-            <a href="{% url 'admin_view_active_users' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h1>{{dormant_users_count}}</h1>
-              <p>Dormant Users</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-ios-person-outline"></i>
-            </div>
-            <a href="{% url 'admin_view_dormant_users' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -79,20 +66,7 @@
             <a href="{% url 'admin_course_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h1>{{total_exam_count}}</h1>
-              <p>Exams</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-ios-bookmarks"></i>
-            </div>
-            <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+      
       </div>
     </div><!-- /.container-fluid -->
   </section>
