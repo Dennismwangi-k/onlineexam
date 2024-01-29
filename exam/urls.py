@@ -41,7 +41,7 @@ urlpatterns = [
     path('test/<int:exam_id>/', app_views.test, name='test'),
     path('check_answer/<int:answer_id>/', admin_views.check_answer, name='check_answer'),
 
-    ##Admin Views
+
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
 
     path('customadmin/course_list/', admin_views.course_list, name='admin_course_list'),
