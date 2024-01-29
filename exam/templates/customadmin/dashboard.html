@@ -1,29 +1,26 @@
 {% extends "customadmin/base.html" %}
 {% block content %}
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Dashboard</h1>
-        </div><!-- /.col -->
+        </div>
         <div class="col-sm-6">
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /.content-header -->
 
-
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
+
       <div class="row">
         <div class="col-lg-3 col-6">
-          <!-- small box -->
+      
           <div class="small-box bg-secondary">
             <div class="inner">
               <h1>{{total_users_count}}</h1>
@@ -36,9 +33,9 @@
           </div>
         </div>
      
-        <!-- ./col -->
+    
         <div class="col-lg-3 col-6">
-          <!-- small box -->
+     
           <div class="small-box bg-success">
             <div class="inner">
               <h1>{{total_exam_count}}</h1>
@@ -50,11 +47,11 @@
             <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+     
       </div>
       <div class="row">
         <div class="col-lg-3 col-6">
-          <!-- small box -->
+         
           <div class="small-box bg-secondary">
             <div class="inner">
               <h1>{{total_courses_count}}</h1>
@@ -68,9 +65,9 @@
         </div>
       
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
   </section>
 
-  <!-- /.content -->
+
 </div>
 {% endblock %}
