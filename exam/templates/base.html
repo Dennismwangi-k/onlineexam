@@ -26,6 +26,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="{% static 'dist/css/custom.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -107,7 +108,7 @@
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="https://Online Exam">Online Exam</a>.</strong>
+    <strong>Copyright &copy; <span id="currentYear"></span> <a href="https://Online Exam">Online Exam</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0

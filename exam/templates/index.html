@@ -58,6 +58,7 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <script src="{% static 'js/script.js' %}"></script>
 </head>
 </head>
 
@@ -620,7 +621,7 @@
       </div> <!-- end container -->
   </div>
   <div class="footer-bottom">
-      <h5>&copy; Copyright 2023 OnlineExam Platform. All rights reserved.</h5>
+      <h5>&copy; Copyright <span id="currentYear"></span> OnlineExam Platform. All rights reserved.</h5>
       <h6>Website designed and developed for OnlineExam Platform</h6>
   </div>
 </footer>
