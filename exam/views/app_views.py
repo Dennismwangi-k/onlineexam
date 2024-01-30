@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from exam.models import Exam, Questions
+from exam.models import Exam, Questions, Notes
 
 # Create your views here.
 def index(request):
@@ -35,3 +35,12 @@ def test(request,exam_id):
                 "exam_id":exam_id
               }
     return render(request, 'test.html', context)
+
+
+def notes_list(request):
+    notes = Notes.objects.all()
+    return render(request, 'notes_list.html', {'notes': notes})
+
+def note_detail(request, pk):
+    note = get_object_or_404(Notes, pk=pk)
+    return render(request, 'note_details.html', {'note': note})

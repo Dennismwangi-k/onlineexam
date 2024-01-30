@@ -1,15 +1,10 @@
 # customadmin/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
+from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions, Notes
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from exam.forms import AdminProfileUpdateForm, AdminSetPasswordForm, AnswerForm, CourseForm, ExamForm,ProfileUpdateForm, QuestionAnswerFormSet, QuestionForm
-from django.db.models import Sum, IntegerField
-from django.db.models.functions import Round
-from django.contrib.auth.models import Group
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.views import PasswordChangeView
+from exam.forms import AdminProfileUpdateForm, CourseForm, ExamForm, QuestionAnswerFormSet, QuestionForm, NotesForm
 from exam.decorators import admin_only
 from django.http import JsonResponse
 
@@ -44,10 +39,6 @@ def all_users(request):
         'table_title': "All Users"
     }
     return render(request, 'customadmin/users.html', context)
-
-
-
-
 
 
 @login_required
@@ -237,10 +228,8 @@ def edit_question(request, question_id):
     return render(request, 'customadmin/edit_question.html', context)
 
 
-
-
 @login_required
-# @admin_only
+@admin_only
 def delete_question(request, question_id):
     question = get_object_or_404(Questions, pk=question_id)
     if question:
@@ -264,3 +253,38 @@ def check_answer(request, answer_id):
     }
 
     return JsonResponse(result)
+
+@login_required
+@admin_only
+def note_create(request):
+    if request.method == 'POST':
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Note created successfully!')
+            return redirect('notes_list')
+    else:
+        form = NotesForm()
+    return render(request, 'customadmin/notes_form.html', {'form': form})
+
+@login_required
+@admin_only
+def note_update(request, note_id):
+    note = get_object_or_404(Notes, pk=note_id)
+    if request.method == 'POST':
+        form = NotesForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Note updated successfully!')
+            return redirect('notes_list')
+    else:
+        form = NotesForm(instance=note)
+    return render(request, 'customadmin/notes_form.html', {'form': form})
+
+@login_required
+@admin_only
+def note_delete(request, note_id):
+    note = get_object_or_404(Notes, pk=note_id)
+    note.delete()
+    messages.success(request, 'Note deleted successfully!')
+    return redirect('notes_list')
