@@ -1,0 +1,49 @@
+<!-- note_detail.html -->
+
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="font-weight-bold">Course Notes</h1>
+          </div>
+        </div>
+      </div> 
+    </section> -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title font-weight-bold"> {{ note.title }}</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="row">
+                <div class="card mb-3">
+                  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                  <div class="card-body">
+                    <!-- <h5 class="card-title">{{ note.title }}</h5> -->
+                    <p class="card-text">{{ note.description }}</p>
+                    <p class="card-text"><small class="text-muted">Last updated {{ note.updated_at }}</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

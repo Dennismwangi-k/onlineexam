@@ -91,8 +91,7 @@ WSGI_APPLICATION = 'online_examination.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-import os
-from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent
 

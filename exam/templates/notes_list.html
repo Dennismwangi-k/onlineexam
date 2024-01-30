@@ -1,0 +1,51 @@
+<!-- notes_list.html -->
+
+
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="font-weight-bold">Course Notes</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title font-weight-bold">Notes for this Course {{ note.course.course_name }}</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="row">
+                {% for note in notes %}
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <a href="{% url 'note_detail' note.id %}" class="card-title">{{ note.title }}</a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

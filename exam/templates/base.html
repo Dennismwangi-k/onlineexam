@@ -26,6 +26,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="{% static 'dist/css/custom.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -73,26 +74,26 @@
           <li class="nav-item">
             <a href="{% url 'exam' %}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Exam
-              </p>
+                <p>Exam</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{% url 'profile' %}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
-              <p>
-                Profile
-              </p>
+              <p>Profile</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'notes_list' %}" class="nav-link">
+              <i class="nav-icon far fa-book-outline"></i>
+              <p>Notes</p>
             </a>
           </li>
           <li class="nav-header">Other Services</li>
           <li class="nav-item">
             <a href="{% url 'logout' %}" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
-              <p>
-                Logout
-              </p>
+              <p>Logout</p>
             </a>
           </li>
         </ul>
@@ -107,7 +108,7 @@
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="https://Online Exam">Online Exam</a>.</strong>
+    <strong>Copyright &copy; <span id="currentYear"></span> <a href="https://Online Exam">Online Exam</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0

@@ -42,6 +42,17 @@ urlpatterns = [
     path('check_answer/<int:answer_id>/', admin_views.check_answer, name='check_answer'),
 
 
+    #  Notes URLs
+    path('notes_list/', app_views.notes_list, name='notes_list'),
+    path('note/<int:pk>/', app_views.note_detail, name='note_detail'),
+
+    path('customadmin/note/<int:pk>/', admin_views.admin_note_detail, name='admin_note_detail'),
+    path('customadmin/notes_list/', admin_views.admin_notes_list, name='admin_notes'),
+    path('customadmin/create_note/', admin_views.note_create, name='admin_note_create'),
+    path('customadmin/edit_note/<int:note_id>/', admin_views.note_update, name='admin_edit_note'),
+    path('customadmin/delete_note/<int:note_id>/', admin_views.note_delete, name='admin_delete_note'),
+
+
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
 
     path('customadmin/course_list/', admin_views.course_list, name='admin_course_list'),

@@ -26,6 +26,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="{% static 'dist/css/custom.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,7 +47,7 @@
   </style>
  
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: aliceblue; color: black;">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'admin_dashboard' %}" class="brand-link">
   <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
@@ -78,59 +79,47 @@
           <li class="nav-item" >
             <a href="{% url 'admin_dashboard' %}" class="nav-link active" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
+              <p style="color: aliceblue;">
                 Overview
               </p>
             </a>
-          </li>
-         
-          
+          </li>  
           <li class="nav-item">
-            
                 <a href="{% url 'admin_course_list' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Courses</p>
+                  <p style="color: aliceblue;">Courses</p>
                 </a>
               </li>
               <li class="nav-item">
-             
-           
           </li>
           <li class="nav-item">
-            
-             
-                <a href="{% url 'admin_exam_list' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p> Exams</p>
-                </a>
-              </li>
-           
-          
-      
-
-          
-          <li class="nav-item">
-            
-            <a href="{% url 'admin_view_all_users' %}" class="nav-link">
+            <a href="{% url 'admin_exam_list' %}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>All Users</p>
+              <p style="color: aliceblue;"> Exams</p>
             </a>
           </li>
-        
+          <li class="nav-item">
+            <a href="{% url 'admin_notes' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p style="color: aliceblue;"> Notes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'admin_view_all_users' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p style="color: aliceblue;">All Users</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{% url 'profile' %}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
-              <p>
-                Settings
-              </p>
+              <p style="color: aliceblue;">Settings</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{% url 'logout' %}" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
-              <p>
-                Logout
-              </p>
+              <p style="color: aliceblue;">Logout</p>
             </a>
           </li>
         </ul>

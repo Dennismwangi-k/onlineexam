@@ -1,0 +1,82 @@
+<!-- note_detail.html -->
+
+{% extends "customadmin/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="font-weight-bold">Course Notes</h1>
+          </div>
+        </div>
+      </div> 
+    </section> -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title font-weight-bold"> {{ note.title }}</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="row">
+                <div class="card mb-3">
+                  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                  <div class="card-body">
+                    <!-- <h5 class="card-title">{{ note.title }}</h5> -->
+                    <p class="card-text">{{ note.description }}</p>
+                    <p class="card-text"><small class="text-muted">Last updated {{ note.updated_at }}</small></p>
+                  </div>
+                  <button href="{% url 'admin_edit_note' note.id %}" class="btn btn-warning">
+                    Update note
+                  </button>
+                  <button type="button" class="btn btn-danger" data-toggle="modal"
+                  data-target="#delete-note-{{note.id}}">
+              Delete
+          </button>
+                </div>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="modal fade" id="delete-note-{{note.id}}">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title">Delete course  {{note.title}}</h4>
+                  <button type="button" class="close" data-dismiss="modal"
+                          aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>Are you sure you want to delete this note?</p>
+              </div>
+              <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-info"
+                          data-dismiss="modal">Close
+                  </button>
+                  <a href="{% url 'admin_delete_note' note.id %}">
+                      <button type="submit" class="btn btn-danger">Delete
+                      </button>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- /.content -->
+  </div>
+{% endblock %}
