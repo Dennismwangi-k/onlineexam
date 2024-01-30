@@ -1,0 +1,96 @@
+<!-- note_form.html -->
+{% extends "customadmin/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="font-weight-bold">Course Notes</h1>
+            <a type="button" class="btn btn-primary content" data-toggle="modal" data-target="#addCourseModal" style="margin-right: 0; width:10%; margin-left: 90%;">
+                Add New Notes
+            </a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title font-weight-bold">Your Notes</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="row">
+                {% for note in notes %}
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <a href="{% url 'admin_note_detail' note.id %}" class="card-title">{{ note.title }}</a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <div class="modal fade" id="addCourseModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{% if form.instance.pk %}Update Note{% else %}Create Note{% endif %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %} Note</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+  <!-- RAW HTML -->
+  <!-- <h2>{% if form.instance.pk %}Update Note{% else %}Create Note{% endif %}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %} Note</button>
+  </form> -->
+{% endblock %}
