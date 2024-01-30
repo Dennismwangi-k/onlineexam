@@ -1,7 +1,8 @@
+from dataclasses import field
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
-from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
+from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions, Notes
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=144, required=True)
@@ -115,3 +116,8 @@ QuestionAnswerFormSet = forms.inlineformset_factory(
     max_num=4,
     validate_max=True,
 )
+
+class NotesForm(forms.ModelForm):
+    class Meta:
+        model = Notes 
+        fields = '__all__'
