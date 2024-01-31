@@ -36,13 +36,13 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                   <div class="card-body">
                     {% csrf_token %}
-                    {% bootstrap_form form %}
+                    {{ form.as_p }}
                   </div>
                   <!-- /.card-body -->
   
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <p><a href="{% url 'note_detail' note.id %}">Cancel</a></p>
+                    <p><a href="{% url 'admin_note_detail' note.id %}">Cancel</a></p>
                   </div>
                 </form>
               </div>
