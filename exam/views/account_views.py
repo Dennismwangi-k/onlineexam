@@ -1,24 +1,24 @@
+from datetime import datetime, timedelta
+
 from django import forms
-from django.contrib.auth.decorators import login_required
-
 from django.contrib import messages
-
 from django.contrib.auth import authenticate
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
-
-from django.http import HttpResponse, Http404
+from django.contrib.auth import logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
+from django.http import Http404, HttpResponse
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
+                              redirect, render)
 
-from django.contrib.auth import logout
-from django.contrib.auth import update_session_auth_hash
-
-
+from exam.forms import (CustomPasswordChangeForm, ProfileUpdateForm,
+                        RegistrationForm)
 from exam.models import ExamUser
+from subscriptions.models import Subscription, SubscriptionPackage
 
-
-from exam.forms import CustomPasswordChangeForm, ProfileUpdateForm, RegistrationForm
+date_today = datetime.now().date()
+next_date = date_today + timedelta(days=365)
 
 def register(request):
     form = RegistrationForm(request.POST or None)
@@ -30,6 +30,18 @@ def register(request):
             new_user.phone = form.cleaned_data['phone']
             new_user.save()
 
+            """Creating a Free Subscription For New Members"""
+            try:
+                package = SubscriptionPackage.objects.get(name="Freemium")
+                Subscription.objects.create(
+                    user=new_user,
+                    package=package,
+                    start_date=date_today,
+                    end_date=next_date,
+                    status="Active"
+                )
+            except Exception as e:
+                raise e
             # Redirect to the login page after successful registration
             return redirect('login')
 

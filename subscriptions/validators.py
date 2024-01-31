@@ -1,16 +1,14 @@
-from enum import Enum
 
-from django.core.exceptions import ValidationError
-from phonenumber_field.phonenumber import to_python
-from phonenumbers.phonenumberutil import is_possible_number
+def validate_possible_number(phone_number):
+    validated_phone_number = ""
 
-from .error_code import PaymentErrorCode
+    if phone_number[0] == "2" or phone_number[0] == 2:
+        validated_possible_number = phone_number
+    elif phone_number[0] == "+":
+        validated_possible_number = phone_number[1:]
 
+    elif phone_number[0] == "0" or phone_number[0] == "0":
+        validated_possible_number = "254" + phone_number[1:]
+    
+    return validated_possible_number
 
-def validate_possible_number(phone, country=None):
-    phone_number = to_python(phone, country)
-    if (phone_number and not is_possible_number(phone_number) or not phone_number.is_valid()):
-        raise ValidationError(
-            "The phone number entered is not valid.", code=PaymentErrorCode.INVALID
-        )
-    return phone_number

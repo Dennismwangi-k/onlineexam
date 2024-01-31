@@ -2,8 +2,12 @@ from django.db import models
 
 from subscriptions.shared_methods import convert_timestamp_to_datetime
 
-
 # Create your models here.
+SUBSCRIPTION_STATUS_CHOICES = (
+    ("Active", "Active"),
+    ("Deactivated", "Deactivated"),
+)
+
 class SubscriptionPackage(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=100, decimal_places=2)
@@ -17,10 +21,10 @@ class Subscription(models.Model):
     package = models.ForeignKey(SubscriptionPackage, on_delete=models.SET_NULL, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
+    status = models.CharField(max_length=255, choices=SUBSCRIPTION_STATUS_CHOICES, null=True)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
-
 
 
 class MpesaResponseData(models.Model):

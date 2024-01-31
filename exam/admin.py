@@ -5,7 +5,10 @@ from .models import Courses, ExamUser, QuestionAnswers, Questions
 # Register your models here.
 
 
-admin.site.register(ExamUser)
+@admin.register(ExamUser)
+class ExamUserAdmin(admin.ModelAdmin):
+    list_display = ["id", "first_name", "last_name", "email", "username", "phone", "is_subscription_active"]
+
 admin.site.register(Courses)
 admin.site.register(Questions)
 admin.site.register(QuestionAnswers)

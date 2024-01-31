@@ -25,6 +25,10 @@ class ExamUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    @property
+    def is_subscription_active(self):
+        return True
     
 
 
