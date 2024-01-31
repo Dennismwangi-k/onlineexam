@@ -14,7 +14,7 @@ class ExamUser(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=144, blank=True, null=True)
     last_name = models.CharField(max_length=144, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to="profiles", null=True, blank=True)
+    profile_picture = models.ImageField(upload_to="profiles", null=True, blank=True, default='default.png')
     phone = models.CharField(
         max_length=13,
         null=True,
