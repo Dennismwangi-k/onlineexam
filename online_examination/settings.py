@@ -62,6 +62,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+BACKEND_URL = ""
+
+CSRF_TRUSTED_ORIGINS = ["https://a45a-41-139-145-247.ngrok-free.app"]
+
 ROOT_URLCONF = 'online_examination.urls'
 
 TEMPLATES = [
@@ -95,7 +99,16 @@ WSGI_APPLICATION = 'online_examination.wsgi.application'
 
 
 BASE_DIR = Path(__file__).resolve().parent
-
+"""
+if DEBUG:
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+else:
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

@@ -11,10 +11,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from exam.decorators import admin_only
 from exam.forms import (AdminProfileUpdateForm, AdminSetPasswordForm,
-                        AnswerForm, CourseForm, ExamForm, NotesForm,
-                        ProfileUpdateForm, QuestionAnswerFormSet, QuestionForm)
-from exam.models import (Courses, Exam, ExamUser, Notes, QuestionAnswers,
-                         Questions)
+                        AnswerForm, CourseForm, ExamForm, ProfileUpdateForm,
+                        QuestionAnswerFormSet, QuestionForm)
+from exam.models import Courses, Exam, ExamUser, QuestionAnswers, Questions
 
 
 @login_required

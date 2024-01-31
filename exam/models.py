@@ -22,9 +22,12 @@ class ExamUser(AbstractUser):
         blank=True,
         validators=[MinLengthValidator(10), MaxLengthValidator(13)],
     )
+    subscription_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.username
+
+    
     
 
 

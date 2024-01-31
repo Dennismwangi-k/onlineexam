@@ -1,4 +1,5 @@
 import base64
+import json
 import logging
 import math
 import time
@@ -8,6 +9,9 @@ import requests
 from django.conf import settings
 from requests import Response
 from requests.auth import HTTPBasicAuth
+
+from subscriptions.models import MpesaCheckoutRequest
+from subscriptions.validators import validate_possible_number
 
 from .exceptions import *
 
@@ -46,6 +50,7 @@ MPESA_CONSUMER_SECRET = "PiGclKo8BdIonnARWopOfr1RFWq50pRbGjH8pmTkFhUGw2nYYgnkvkP
 MPESA_CHECKOUT_URL = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 MPESA_ACCESS_TOKEN_URL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
 MPESA_PASS_KEY = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+TRANSACTION_VERIFY_URL = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query"
 
 
 class MpesaGateWay:
@@ -112,7 +117,7 @@ class MpesaGateWay:
         return base64.b64encode(password_bytes).decode("utf-8")
 
     @Decorators.refreshToken
-    def stk_push(self, phone_number, amount, callback_url, account_reference, transaction_desc):
+    def stk_push(self, phone_number, amount, callback_url, account_reference, transaction_desc, user_email):
         if str(account_reference).strip() == '':
             raise MpesaInvalidParameterException('Account reference cannot be blank')
 
@@ -148,11 +153,38 @@ class MpesaGateWay:
 
             response = mpesa_response(res)
 
+            print("********************Mpesa Result***********************")
+            print(res.text)
+            body = json.loads(res.text)
+            print(type(res.text))
+            checkout_req = MpesaCheckoutRequest.objects.create(**body)
+            checkout_req.AmountExpected = amount
+            checkout_req.PhoneNumber = phone_number
+            checkout_req.UserEmail = user_email
+            checkout_req.save()
+            print("********************Mpesa Result***********************")
+
             return response
         except requests.exceptions.ConnectionError:
             raise MpesaConnectionError('Connection failed')
         except Exception as ex:
             raise MpesaConnectionError(str(ex))
+
+    def verify_transaction(self, checkout_id):
+        req_data = {
+            "BusinessShortCode":"174379",    
+            "Password": self.password,    
+            "Timestamp":self.timestamp,    
+            "CheckoutRequestID": checkout_id,
+        }
+        res = requests.post(
+            url=TRANSACTION_VERIFY_URL,
+            json=req_data,
+            headers=self.headers,
+            timeout=30
+        )
+
+        return res
 
     @Decorators.refreshToken
     def c2b(self, amount, phone_number, bill_reference_number):

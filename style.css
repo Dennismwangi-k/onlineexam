@@ -1,0 +1,16 @@
+body {
+    font-size: 15px;
+}
+
+#paragraph2 #pid2 {
+    font-style: italic;
+}
+
+
+article > p {
+    color: blue;
+}
+
+p + h1 {
+    font-style: italic;
+}
