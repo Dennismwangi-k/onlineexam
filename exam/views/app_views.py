@@ -1,14 +1,24 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from exam.models import Exam, Questions
+from subscriptions.subscription_mixin import ProcessSubscriptionMixin
 
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
+@login_required(login_url="/accounts/login/")
 def exam(request):
+    user=request.user
     exams = Exam.objects.all()
+    try:
+        mixin = ProcessSubscriptionMixin(email=user.email)
+        mixin.run()
+    except Exception as e:
+        raise e
+
     context = {
         "exams": exams,
     }

@@ -62,6 +62,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+BACKEND_URL = ""
+
+CSRF_TRUSTED_ORIGINS = ["https://a45a-41-139-145-247.ngrok-free.app"]
+
 ROOT_URLCONF = 'online_examination.urls'
 
 TEMPLATES = [
@@ -96,7 +100,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-
+"""
 if DEBUG:
     DATABASES = {
     "default": {
@@ -105,16 +109,17 @@ if DEBUG:
     }
 }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'rentdatabase',
-            'USER': 'rentdatabase_user',
-            'PASSWORD': 'Bm0kv5egYEzXWjCOy7L2hbNAg3K7FiKb',
-            'HOST': 'dpg-cl9qi61m6hds73db3j10-a.oregon-postgres.render.com',
-            'PORT': '5432',  # Assuming the default PostgreSQL port
-        }
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rentdatabase',
+        'USER': 'rentdatabase_user',
+        'PASSWORD': 'Bm0kv5egYEzXWjCOy7L2hbNAg3K7FiKb',
+        'HOST': 'dpg-cl9qi61m6hds73db3j10-a.oregon-postgres.render.com',
+        'PORT': '5432',  # Assuming the default PostgreSQL port
     }
+}
 
 
 AUTH_USER_MODEL ='exam.ExamUser'

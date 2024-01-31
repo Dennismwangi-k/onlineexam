@@ -16,6 +16,7 @@ from exam.forms import (CustomPasswordChangeForm, ProfileUpdateForm,
                         RegistrationForm)
 from exam.models import ExamUser
 from subscriptions.models import Subscription, SubscriptionPackage
+from subscriptions.subscription_mixin import ProcessSubscriptionMixin
 
 date_today = datetime.now().date()
 next_date = date_today + timedelta(days=365)
@@ -60,8 +61,10 @@ def login(request):
         if request.user.is_superuser:
             return redirect('admin_dashboard')
         else:
+            mixin = ProcessSubscriptionMixin(email=user.email)
+            mixin.run()
             return redirect('exam')
-
+            
       else:
         messages.error(request, "Invalid username or password.")
     else:

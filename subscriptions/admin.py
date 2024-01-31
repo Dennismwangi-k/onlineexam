@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from subscriptions.models import (MpesaResponseData, MpesaTransaction,
-                                  Subscription, SubscriptionPackage)
+from subscriptions.models import (MpesaCheckoutRequest, MpesaResponseData,
+                                  MpesaTransaction, Subscription,
+                                  SubscriptionPackage)
 
+
+@admin.register(MpesaCheckoutRequest)
+class MpesaCheckoutRequestAdmin(admin.ModelAdmin):
+    list_display = ["id", "created", "PhoneNumber", "AmountExpected", "MerchantRequestID", "CheckoutRequestID", "ResponseCode", "ResponseDescription", "CustomerMessage"]
 
 # Register your models here.
 @admin.register(SubscriptionPackage)
