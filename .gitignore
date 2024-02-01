@@ -160,6 +160,7 @@ dmypy.json
 #.idea/
 .venv/
 .vscode/
+.idea/
 
 .DS_Store
 
