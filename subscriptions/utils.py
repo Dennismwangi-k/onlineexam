@@ -152,17 +152,22 @@ class MpesaGateWay:
                                 headers=self.headers, timeout=30)
 
             response = mpesa_response(res)
-
-            print("********************Mpesa Result***********************")
             print(res.text)
-            body = json.loads(res.text)
-            print(type(res.text))
-            checkout_req = MpesaCheckoutRequest.objects.create(**body)
-            checkout_req.AmountExpected = amount
-            checkout_req.PhoneNumber = phone_number
-            checkout_req.UserEmail = user_email
-            checkout_req.save()
-            print("********************Mpesa Result***********************")
+
+            if response.status_code in [200, 201]:
+
+                print("********************Mpesa Result***********************")
+                print(res.text)
+                body = json.loads(res.text)
+                print(type(res.text))
+                checkout_req = MpesaCheckoutRequest.objects.create(**body)
+                checkout_req.AmountExpected = amount
+                checkout_req.PhoneNumber = phone_number
+                checkout_req.UserEmail = user_email
+                checkout_req.save()
+                print("********************Mpesa Result***********************")
+            else:
+                print("************Can't write mpesa checkout response")
 
             return response
         except requests.exceptions.ConnectionError:

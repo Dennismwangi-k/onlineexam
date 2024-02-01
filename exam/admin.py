@@ -5,7 +5,7 @@ from .models import Courses, ExamUser, Notes, QuestionAnswers, Questions
 
 @admin.register(ExamUser)
 class ExamUserAdmin(admin.ModelAdmin):
-    list_display = ["id", "first_name", "last_name", "email", "username", "phone"]
+    list_display = ["id", "first_name", "last_name", "email", "username", "phone", "subscription_active"]
 
 admin.site.register(Courses)
 admin.site.register(Questions)
