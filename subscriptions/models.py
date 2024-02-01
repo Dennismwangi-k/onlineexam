@@ -51,6 +51,7 @@ class MpesaTransaction(models.Model):
     TransactionDate = models.DateTimeField()
     PhoneNumber = models.CharField(max_length=255)
     MpesaReceiptNumber = models.CharField(max_length=255)
+    MpesaUser = models.ForeignKey("exam.ExamUser", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.MpesaReceiptNumber

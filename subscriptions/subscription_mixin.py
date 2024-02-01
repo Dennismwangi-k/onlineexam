@@ -44,8 +44,7 @@ class ProcessSubscriptionMixin(object):
                         name__in=["Pro Plan", "Pro"])
 
                     mpesa = MpesaGateWay()
-                    res = mpesa.verify_transaction(
-                        checkout_id=checkout_req.CheckoutRequestID)
+                    res = mpesa.verify_transaction(checkout_id=checkout_req.CheckoutRequestID)
 
                     res_data = json.loads(res.text)
 

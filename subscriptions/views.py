@@ -22,7 +22,7 @@ def pay_subscription(request):
         mpesa.stk_push(
             phone_number=valid_phone_number,
             amount=int(amount),
-            callback_url=f"{settings.BACKEND_URL}/subscriptions/lipa-na-mpesa-callback/",
+            callback_url=f"{settings.BACKEND_URL}/subscriptions/lipa-na-mpesa-callback/?user_id={user.id}",
             account_reference="Exam subscription payments!!",
             transaction_desc="This is a student exam subscription payment.",
             user_email=user.email

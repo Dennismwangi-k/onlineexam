@@ -27,4 +27,4 @@ class MpesaResponseDataAdmin(admin.ModelAdmin):
 
 @admin.register(MpesaTransaction)
 class MpesaTransactionAdmin(admin.ModelAdmin):
-    list_display = ["id", "MerchantRequestID", "CheckoutRequestID", "ResultCode", "ResultDesc", "Amount", "TransactionTimeStamp", "TransactionDate", "PhoneNumber", "MpesaReceiptNumber"]
+    list_display = ["id", "MerchantRequestID", "MpesaUser", "CheckoutRequestID", "ResultCode", "ResultDesc", "Amount", "TransactionTimeStamp", "TransactionDate", "PhoneNumber", "MpesaReceiptNumber"]

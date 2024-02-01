@@ -62,7 +62,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
-BACKEND_URL = ""
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000")
 
 CSRF_TRUSTED_ORIGINS = ["https://a45a-41-139-145-247.ngrok-free.app"]
 
@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'online_examination.wsgi.application'
 
 
 BASE_DIR = Path(__file__).resolve().parent
-"""
+
 if DEBUG:
     DATABASES = {
     "default": {
@@ -107,7 +107,7 @@ if DEBUG:
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-else:
+##else:
 """
 DATABASES = {
     'default': {
@@ -119,7 +119,7 @@ DATABASES = {
         'PORT': '5432',  # Assuming the default PostgreSQL port
     }
 }
-
+"""
 
 AUTH_USER_MODEL ='exam.ExamUser'
 # Password validation
