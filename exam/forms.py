@@ -123,4 +123,4 @@ QuestionAnswerFormSet = forms.inlineformset_factory(
 class NotesForm(forms.ModelForm):
     class Meta:
         model = Notes 
-        fields = '__all__'
+        fields = ['course', 'title', 'description', 'file_upload']

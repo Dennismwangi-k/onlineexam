@@ -34,6 +34,11 @@
                   <div class="card-body">
                     <!-- <h5 class="card-title">{{ note.title }}</h5> -->
                     <p class="card-text">{{ note.description }}</p>
+                    {% if note.file_upload %}
+                      <p>File: <a href="{{ note.file_upload.url }}" target="_blank">{{ note.file_upload.name }}</a></p>
+                    {% else %}
+                      <p>No file uploaded for this note.</p>
+                    {% endif %}
                     <p class="card-text"><small class="text-muted">Last updated {{ note.updated_at }}</small></p>
                   </div>
                 </div>

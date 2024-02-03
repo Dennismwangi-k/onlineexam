@@ -47,7 +47,7 @@ urlpatterns = [
     path('note/<int:pk>/', app_views.note_detail, name='note_detail'),
 
     path('customadmin/note/<int:pk>/', admin_views.admin_note_detail, name='admin_note_detail'),
-    path('customadmin/notes_list/', admin_views.admin_notes_list, name='admin_notes'),
+    path('customadmin/notes_list/', admin_views.admin_notes_list, name='admin_notes_list'),
     path('customadmin/create_note/', admin_views.note_create, name='admin_note_create'),
     path('customadmin/edit_note/<int:note_id>/', admin_views.note_update, name='admin_edit_note'),
     path('customadmin/delete_note/<int:note_id>/', admin_views.note_delete, name='admin_delete_note'),

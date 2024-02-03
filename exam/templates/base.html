@@ -1,4 +1,7 @@
 {% load static %}
+{% load custom_tags %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +60,7 @@
           {% if user.profile_picture %}
           <img class="img-circle elevation-2" alt="User Image" src="{{ user.profile_picture.url }}">
           {% else %}
-          <img class="img-circle elevation-2" alt="User Image" src="{% static 'dist/img/person-outline-filled.png' %}">
+          <img class="img-circle elevation-2" alt="User Image" src="{% static 'images/default.png' %}">
           {% endif %}
         </div>
         <div class="info">
@@ -72,19 +75,19 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{% url 'exam' %}" class="nav-link active">
+            <a href="{% url 'exam' %}" class="nav-link {% is_active request 'exam' %}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Exam</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'profile' %}" class="nav-link">
+            <a href="{% url 'profile' %}" class="nav-link {% is_active request 'profile' %}">
               <i class="nav-icon far fa-user"></i>
               <p>Profile</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'notes_list' %}" class="nav-link">
+            <a href="{% url 'notes_list' %}" class="nav-link {% is_active request 'notes_list' %}">
               <i class="nav-icon far fa-book-outline"></i>
               <p>Notes</p>
             </a>

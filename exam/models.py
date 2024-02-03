@@ -15,7 +15,7 @@ class ExamUser(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=144, blank=True, null=True)
     last_name = models.CharField(max_length=144, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to="profiles", null=True, blank=True)
+    profile_picture = models.ImageField(upload_to="profiles", null=True, blank=True, default='default.png')
     phone = models.CharField(
         max_length=13,
         null=True,
@@ -87,6 +87,7 @@ class Notes(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    file_upload = models.FileField(upload_to='note_files/', null=True, blank=True)
 
     def __str__(self):
         return self.title

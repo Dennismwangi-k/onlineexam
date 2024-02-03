@@ -266,11 +266,11 @@ def check_answer(request, answer_id):
 @admin_only
 def note_create(request):
     if request.method == 'POST':
-        form = NotesForm(request.POST)
+        form = NotesForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Note created successfully!')
-            return redirect('admin_notes')
+            return redirect('admin_notes_list')
     else:
         form = NotesForm()
     return render(request, 'customadmin/notes_form.html', {'form': form})
@@ -281,7 +281,7 @@ def note_create(request):
 def note_update(request, note_id):
     note = get_object_or_404(Notes, pk=note_id)
     if request.method == 'POST':
-        form = NotesForm(request.POST, instance=note)
+        form = NotesForm(request.POST, request.FILES, instance=note)
         if form.is_valid():
             form.save()
             messages.success(request, 'Note updated successfully!')
@@ -297,7 +297,7 @@ def note_delete(request, note_id):
     note = get_object_or_404(Notes, pk=note_id)
     note.delete()
     messages.success(request, 'Note deleted successfully!')
-    return redirect('admin_notes')
+    return redirect('admin_notes_list')
 
 
 @login_required
@@ -309,7 +309,7 @@ def admin_notes_list(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Notes Created Successfully!')
-            return redirect('admin_notes')
+            return redirect('admin_notes_list')
     else:
         form = NotesForm()
 
