@@ -98,7 +98,6 @@ WSGI_APPLICATION = 'online_examination.wsgi.application'
 # }
 
 
-BASE_DIR = Path(__file__).resolve().parent
 
 if DEBUG:
     DATABASES = {
@@ -121,7 +120,7 @@ DATABASES = {
 }
 """
 
-AUTH_USER_MODEL ='exam.ExamUser'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
