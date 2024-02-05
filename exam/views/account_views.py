@@ -1,19 +1,14 @@
 from datetime import datetime, timedelta
 
-from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import Group
-from django.http import Http404, HttpResponse
-from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
-                              redirect, render)
+from django.shortcuts import redirect, render
 
-from exam.forms import (CustomPasswordChangeForm, ProfileUpdateForm,
-                        RegistrationForm)
+from exam.forms import CustomPasswordChangeForm, ProfileUpdateForm, RegistrationForm
 from exam.models import ExamUser
 from subscriptions.models import Subscription, SubscriptionPackage
 from subscriptions.subscription_mixin import ProcessSubscriptionMixin

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from exam.models import Exam, Questions
+from exam.models import Exam, Questions, Notes
 from subscriptions.subscription_mixin import ProcessSubscriptionMixin
 
 
