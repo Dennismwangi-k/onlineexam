@@ -99,26 +99,26 @@ WSGI_APPLICATION = 'online_examination.wsgi.application'
 
 
 
-if DEBUG:
-    DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# if DEBUG:
+#     DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 ##else:
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rentdatabase',
+        'NAME': 'exam',
         'USER': 'rentdatabase_user',
         'PASSWORD': 'Bm0kv5egYEzXWjCOy7L2hbNAg3K7FiKb',
         'HOST': 'dpg-cl9qi61m6hds73db3j10-a.oregon-postgres.render.com',
         'PORT': '5432',  # Assuming the default PostgreSQL port
     }
 }
-"""
+
 
 
 # Password validation
