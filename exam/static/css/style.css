@@ -75,6 +75,10 @@ body {
   padding: 0;
 }
 
+.nav_header {
+  position: relative !important;;
+}
+
 .header_section .nav_container {
   margin: 0 auto;
 }
@@ -383,6 +387,20 @@ a:focus {
   background-color: #5625a1;
 }
 
+/* Sections padding */
+.slider_section, .about, .services, .section-sm, .contact-us  {
+  padding: 0px !important;
+}
+
+.top-footer, .footer-bottom {
+  padding: 30px !important;
+}
+
+.call-to-action{
+  padding: 50px !important;
+}
+/* End of sections padding */
+
 .about_section {
   background-color: #f3f0f6;
 }
@@ -416,7 +434,7 @@ a:focus {
 .about_section .img_container .img-box.b2 {
   width: 50%;
   margin-left: auto;
-  margin-top: -12%;
+  margin-top: -2%;
 }
 
 .about_section .img_container .img-box img {
@@ -428,7 +446,7 @@ a:focus {
 }
 
 .about_section .detail-box p {
-  margin-top: 25px;
+  margin-top: 5px;
 }
 
 .about_section .detail-box a {
