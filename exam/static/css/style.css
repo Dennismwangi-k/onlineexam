@@ -388,8 +388,9 @@ a:focus {
 }
 
 /* Sections padding */
-.slider_section, .about, .services, .section-sm, .contact-us  {
+.slider_section, .about, .services, .section-sm, .contact-us, .testimonial  {
   padding: 0px !important;
+  margin-bottom: 0;
 }
 
 .top-footer, .footer-bottom {
@@ -398,6 +399,10 @@ a:focus {
 
 .call-to-action{
   padding: 50px !important;
+}
+
+.testimonial:before{
+  background-color: #28ABE3 !important;
 }
 /* End of sections padding */
 
