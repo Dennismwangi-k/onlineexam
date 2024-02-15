@@ -17,10 +17,10 @@
   
   <section class="content">
     <div class="container-fluid">
-
       <div class="row">
         <div class="col-lg-3 col-6">
-      
+
+          <!-- Total Users -->
           <div class="small-box bg-secondary">
             <div class="inner">
               <h1>{{total_users_count}}</h1>
@@ -33,9 +33,8 @@
           </div>
         </div>
      
-    
+        <!-- Exam count -->
         <div class="col-lg-3 col-6">
-     
           <div class="small-box bg-success">
             <div class="inner">
               <h1>{{total_exam_count}}</h1>
@@ -47,11 +46,11 @@
             <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-     
       </div>
+
+      <!-- Courses count -->
       <div class="row">
         <div class="col-lg-3 col-6">
-         
           <div class="small-box bg-secondary">
             <div class="inner">
               <h1>{{total_courses_count}}</h1>
@@ -63,10 +62,110 @@
             <a href="{% url 'admin_course_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-      
       </div>
-    </div>
   </section>
+
+  <section style="background-color: aliceblue; " class="content">
+
+    <div style="width: 35%; margin: 0 auto;">
+  
+      <h4>Yearly Signup Visualization</h4>
+      <canvas id="signupChart" width="100px" height="50px"></canvas>
+      <script>
+          // JavaScript code to visualize user signup data using Chart.js
+          var ctx = document.getElementById('signupChart').getContext('2d');
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                  datasets: [{
+                      label: 'Number of Signups',
+                      data: {{ user_signups_data | safe }},
+                      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                      borderColor: 'rgba(54, 162, 235, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+      </script>
+  </div>
+
+</section>
+
+    <!-- Graph 2: Distribution of Courses Based on the Number of Questions -->
+
+<section style="background-color: aliceblue;" class="content">
+
+  <div style="width: 35%; margin: 0 auto;">
+    <canvas id="courseQuestionChart"></canvas>
+
+    <script>
+        var ctx = document.getElementById('courseQuestionChart').getContext('2d');
+        var courseNames = {{ course_names | safe }};
+        var questionCounts = {{ question_counts | safe }};
+        
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: courseNames,
+                datasets: [{
+                    label: 'Number of Questions',
+                    data: questionCounts,
+                    backgroundColor: 'skyblue',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+  </div>
+</section>
+
+<!-- Graph 3: Distribution of Exams Based on Durations -->
+<section style="background-color: aliceblue;" class="content">
+  
+  <div style="width: 35%; margin: 0 auto;">
+    <canvas id="examDurationChart"></canvas>
+
+  <script>
+      var ctx = document.getElementById('examDurationChart').getContext('2d');
+      var durations = {{ durations | safe }};
+      var examCounts = {{ exam_counts | safe }};
+      
+      var chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: durations,
+              datasets: [{
+                  label: 'Number of Exams',
+                  data: examCounts,
+                  backgroundColor: 'lightgreen',
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  </script>
+  </div>
+</section>
+
 
 
 </div>

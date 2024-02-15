@@ -1,3 +1,4 @@
+<!-- visualize_user_signup.html -->
 {% load static %}
 {% load custom_tags %}
 
@@ -134,8 +135,159 @@
     <!-- /.sidebar -->
   </aside>
 
-  {% block content %}
-  {% endblock %}
+  <section style="background-color: aliceblue; padding-left: 15%; height: 320px;" class="content">
+
+    <div class="row">
+      <div class="col-lg-3 col-6">
+
+        <!-- Total Users -->
+        <div class="small-box bg-secondary">
+          <div class="inner">
+            <h1>{{total_users_count}}</h1>
+            <p>Total Users</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-ios-people"></i>
+          </div>
+          <a href="{% url 'admin_view_all_users' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+   
+      <!-- Exam count -->
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h1>{{total_exam_count}}</h1>
+            <p>Exams</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-ios-bookmarks"></i>
+          </div>
+          <a href="{% url 'admin_exam_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses count -->
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-secondary">
+          <div class="inner">
+            <h1>{{total_courses_count}}</h1>
+            <p>Courses</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-ios-book"></i>
+          </div>
+          <a href="{% url 'admin_course_list' %}" class="small-box-footer">View All <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Graph 1: Yearly Signup Visualization  -->
+    <section style="background-color: aliceblue; " class="content">
+
+      <div style="width: 35%; margin: 0 auto;">
+    
+        <h4>Yearly Signup Visualization</h4>
+        <canvas id="signupChart" width="100px" height="50px"></canvas>
+        <script>
+            // JavaScript code to visualize user signup data using Chart.js
+            var ctx = document.getElementById('signupChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [{
+                        label: 'Number of Signups',
+                        data: {{ user_signups_data | safe }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+
+  </section>
+
+  <!-- Graph 2: Distribution of Courses Based on the Number of Questions -->
+<section style="background-color: aliceblue;" class="content">
+  <div style="width: 50%; margin: 0 auto;">
+    <h4>Distribution of Courses Based on the Number of Questions</h4>
+    <canvas id="courseQuestionChart" width="100px" height="50px"></canvas>
+    <script>
+      var ctx2 = document.getElementById('courseQuestionChart').getContext('2d');
+      var courseNames = {{ course_names | safe }};
+      var questionCounts = {{ question_counts | safe }};
+
+      var chart2 = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+              labels: courseNames,
+              datasets: [{
+                  label: 'Number of Questions',
+                  data: questionCounts,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+    </script>
+  </div>
+</section>
+
+<!-- Graph 3: Distribution of Exams Based on Durations -->
+<section style="background-color: aliceblue;" class="content">
+  <div style="width: 50%; margin: 0 auto;">
+    <h4>Distribution of Exams Based on Durations</h4>
+    <canvas id="examDurationChart" width="100px" height="50px"></canvas>
+    <script>
+      var ctx3 = document.getElementById('examDurationChart').getContext('2d');
+      var durations = {{ durations | safe }};
+      var examCounts = {{ exam_counts | safe }};
+
+      var chart3 = new Chart(ctx3, {
+          type: 'bar',
+          data: {
+              labels: durations,
+              datasets: [{
+                  label: 'Number of Exams',
+                  data: examCounts,
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+    </script>
+  </div>
+</section>
+
 
 
 
