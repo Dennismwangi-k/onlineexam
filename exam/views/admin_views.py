@@ -3,6 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.db.models import Count
+from django.db.models.functions import ExtractMonth
+
+from datetime import datetime
 
 from exam.decorators import admin_only
 from exam.forms import *
@@ -27,7 +31,7 @@ def admin_dashboard(request):
 
     }
 
-    return render(request, 'customadmin/dashboard.html', context)
+    return render(request, 'customadmin/data.html', context)
 
 @login_required
 @admin_only
@@ -311,3 +315,62 @@ def admin_notes_list(request):
 def admin_note_detail(request, pk):
     note = get_object_or_404(Notes, pk=pk)
     return render(request, 'customadmin/note_details.html', {'note': note})
+
+
+# Graphs Views
+# User Signup yearly visualization
+def visualize_user_signup(request):
+    # Get the year of the current date
+    current_year = datetime.now().year
+
+    # Filter users who signed up in the current year
+    signups_by_month = ExamUser.objects.filter(date_joined__year=current_year)\
+                                   .annotate(month=ExtractMonth('date_joined'))\
+                                   .values('month')\
+                                   .annotate(count=Count('id'))
+    
+    # Create a list to hold the counts for each month
+    user_signups_data = [0] * 12
+    
+    # Populate the list with counts for each month
+    for signup in signups_by_month:
+        month_index = signup['month'] - 1  # Adjust month index (0-based)
+        user_signups_data[month_index] = signup['count']
+    
+    context = {
+        'user_signups_data': user_signups_data
+    }
+
+    return render(request, 'customadmin/data.html', context)
+
+# Distribution of Courses Based on the Number of Questions
+def course_question_distribution(request):
+    # Query to get the count of questions for each course
+    course_question_counts = Courses.objects.annotate(num_questions=Count('questions'))
+
+    # Extract course names and question counts
+    course_names = [course.course_name for course in course_question_counts]
+    question_counts = [course.num_questions for course in course_question_counts]
+
+    context = { 
+        'course_names': course_names,
+        'question_counts': question_counts
+    }
+
+    return render(request, 'customadmin/data.html', context)
+
+
+# Distribution of Exams Based on Durations
+def exam_duration_distribution(request):
+    # Query to get the count of exams for each duration
+    exam_duration_counts = Exam.objects.values('duration').annotate(count=Count('id'))
+
+    # Extract durations and exam counts
+    durations = [exam['duration'] for exam in exam_duration_counts]
+    exam_counts = [exam['count'] for exam in exam_duration_counts]
+
+    context = {
+        'durations': durations,
+        'exam_counts': exam_counts,
+    }
+    return render(request, 'customadmin/data.html', context)

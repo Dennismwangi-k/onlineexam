@@ -52,6 +52,8 @@ urlpatterns = [
     path('customadmin/edit_note/<int:note_id>/', admin_views.note_update, name='admin_edit_note'),
     path('customadmin/delete_note/<int:note_id>/', admin_views.note_delete, name='admin_delete_note'),
 
+    path('customadmin/data/', admin_views.visualize_user_signup, name='data'),
+
 
     path('customadmin/dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
 

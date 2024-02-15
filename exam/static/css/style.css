@@ -405,6 +405,13 @@ a:focus {
   background-color: #28ABE3 !important;
 }
 /* End of sections padding */
+/* GRAPH */
+#signupChart {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* END GRAPH */
 
 .about_section {
   background-color: #f3f0f6;
