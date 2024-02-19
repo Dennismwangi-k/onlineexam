@@ -85,7 +85,7 @@
                       {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
                         <li >
-                            <a  href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+                            <a  href="{% url 'admin_data' %}">Admin Dashboard</a>
                         </li>
                         {% endif %}
                             <li >
@@ -147,7 +147,7 @@
                           {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a>
+                            <a class="nav-link" href="{% url 'admin_data' %}">Dashboard</a>
                         </li>
                         {% endif %}
                             <li class="nav-item">
