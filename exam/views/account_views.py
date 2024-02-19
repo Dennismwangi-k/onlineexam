@@ -54,7 +54,7 @@ def login(request):
       if user is not None:
         auth_login(request, user)
         if request.user.is_superuser:
-            return redirect('admin_dashboard')
+            return redirect('admin_data')
         else:
             mixin = ProcessSubscriptionMixin(email=user.email)
             mixin.run()

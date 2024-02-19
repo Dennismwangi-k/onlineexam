@@ -31,7 +31,7 @@ def admin_dashboard(request):
 
     }
 
-    return render(request, 'customadmin/data.html', context)
+    return render(request, 'customadmin/dashboard.html', context)
 
 @login_required
 @admin_only
@@ -341,7 +341,7 @@ def visualize_user_signup(request):
         'user_signups_data': user_signups_data
     }
 
-    return render(request, 'customadmin/data.html', context)
+    return render(request, 'customadmin/dashboard.html', context)
 
 # Distribution of Courses Based on the Number of Questions
 def course_question_distribution(request):
@@ -357,7 +357,7 @@ def course_question_distribution(request):
         'question_counts': question_counts
     }
 
-    return render(request, 'customadmin/data.html', context)
+    return render(request, 'customadmin/dashboard.html', context)
 
 
 # Distribution of Exams Based on Durations
@@ -373,4 +373,4 @@ def exam_duration_distribution(request):
         'durations': durations,
         'exam_counts': exam_counts,
     }
-    return render(request, 'customadmin/data.html', context)
+    return render(request, 'customadmin/dashboard.html', context)

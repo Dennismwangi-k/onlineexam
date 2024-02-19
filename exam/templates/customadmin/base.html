@@ -54,7 +54,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{% url 'admin_dashboard' %}" class="brand-link">
+    <a href="{% url 'admin_data' %}" class="brand-link">
   <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
       <span class="brand-text font-weight-light">Online Exam</span>
     </a>
@@ -71,7 +71,7 @@
           {% endif %}
         </div>
         <div class="info">
-          <a href="{% url 'admin_dashboard' %}" class="d-block">{{request.user.first_name}} {{request.user.last_name}}</a>
+          <a href="{% url 'admin_data' %}" class="d-block">{{request.user.first_name}} {{request.user.last_name}}</a>
         </div>
       </div>
 
@@ -82,7 +82,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item" >
-            <a href="{% url 'admin_dashboard' %}" class="nav-link {% is_active request 'admin_dashboard' %}" >
+            <a href="{% url 'admin_data' %}" class="nav-link {% is_active request 'admin_data' %}" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p style="color: aliceblue;">
                 Overview
